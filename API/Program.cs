@@ -1,3 +1,7 @@
+using API.Options;
+using Asp.Versioning;
+using Microsoft.OpenApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,9 +9,36 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-//SwaggerGen
-builder.Services.AddSwaggerGen();
+//Add Api Version
+builder.Services.AddApiVersioning(config =>
+{
+    config.DefaultApiVersion = new ApiVersion(1, 0);
+    config.AssumeDefaultVersionWhenUnspecified = true;
+    config.ReportApiVersions = true;
 
+
+    //config.ApiVersionReader = new QueryStringApiVersionReader();   to read query anfd get verion from it 
+    //config.ApiVersionReader = new HeaderApiVersionReader("x-api-version"); to read version from header
+
+    config.ApiVersionReader = new UrlSegmentApiVersionReader(); // to read version from url segment like api/v1/controller
+
+})
+    .AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";// Formats version as 'v1', 'v1.1', etc.
+    options.SubstituteApiVersionInUrl = true;// This fixes the {version} in Swagger
+});
+
+builder.Services.ConfigureOptions<ConfigurationSwaggerOptions>();
+//SwaggerGen
+builder.Services.AddSwaggerGen(options =>
+{
+    // Define "v1"
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "CWSocial API", Version = "v1" });
+
+    // Define "v2" - Without this line, v2 will never show up!
+    options.SwaggerDoc("v2", new OpenApiInfo { Title = "CWSocial API", Version = "v2" });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -17,7 +48,12 @@ if (app.Environment.IsDevelopment())
 
     //Swagger 
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        // Add both endpoints to the "Select a definition" dropdown
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "CWSocial API v1");
+        options.SwaggerEndpoint("/swagger/v2/swagger.json", "CWSocial API v2");
+    });
 }
 
 app.UseHttpsRedirection();
