@@ -1,5 +1,7 @@
 using API.Options;
 using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,14 +33,7 @@ builder.Services.AddApiVersioning(config =>
 
 builder.Services.ConfigureOptions<ConfigurationSwaggerOptions>();
 //SwaggerGen
-builder.Services.AddSwaggerGen(options =>
-{
-    // Define "v1"
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "CWSocial API", Version = "v1" });
-
-    // Define "v2" - Without this line, v2 will never show up!
-    options.SwaggerDoc("v2", new OpenApiInfo { Title = "CWSocial API", Version = "v2" });
-});
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,16 +45,28 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        // Add both endpoints to the "Select a definition" dropdown
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "CWSocial API v1");
-        options.SwaggerEndpoint("/swagger/v2/swagger.json", "CWSocial API v2");
+        //// Add both endpoints to the "Select a definition" dropdown
+        //options.SwaggerEndpoint("/swagger/v1/swagger.json", "CWSocial API v1");
+        //options.SwaggerEndpoint("/swagger/v2/swagger.json", "CWSocial API v2");
+
+        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+            description.ApiVersion.ToString());
+
+        }
+        ;
+
     });
+   
 }
+
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+    app.UseAuthorization();
 
-app.MapControllers();
+    app.MapControllers();
 
-app.Run();
+    app.Run();
