@@ -13,22 +13,4 @@ namespace Domain.Models.Conasts
     
     }
 
-    public enum PrivacySetting
-    {
-        Public = 0,
-        FriendsOnly = 1,
-        Private = 2
-    }
-
-    public enum ReactionType
-    {
-        Like = 6,
-        Love = 1,
-        Haha = 2,
-        Wow = 3,
-        Sad = 4,
-        Angry = 5,
-        None = 0
-    }
-
 }
