@@ -5,29 +5,61 @@ namespace Domain.Models.Posts
 {
     public class Post : BaseEntity<int>
     {
-        public string Content { get; set; } = string.Empty;
-        public string MediaUrl { get; set; } = string.Empty;
-        public PostType PostType { get; set; } = PostType.Text;
-        public PrivacySetting PrivacySetting { get; set; } = PrivacySetting.Public;
-        public int LikesCount { get; set; }
-        public int CommentsCount { get; set; }
-        public Guid UserProfileId { get; set; }
-        public UserProfile UserProfile { get; set; }
-        public ICollection<PostComment>? PostComments { get; set; }
-        public ICollection<PostInterAction>? PostInterActions { get; set; }
-    }
+        private readonly List<PostComment> _postComments = new List<PostComment>();
+        private readonly List<PostInterAction> _postInterAction = new List<PostInterAction>();
 
-    public class PostComment : BaseEntity<int>
-    {
-        public int PostId { get; set; }
-        public string Text { get; set; }
-        public Guid UserProfileId { get; set; }
+        private Post()
+        {
 
-    }
+        }
 
-    public class PostInterAction : BaseEntity<int>  
-    {
-        public int PostId { get; set; }
-        public ReactionType ReactionType { get; set; }
+        public string Content { get; private set; } = string.Empty;
+
+        public Guid UserProfileId { get; private set; }
+        public UserProfile UserProfile { get; private set; }
+        public IEnumerable<PostComment>? PostComments { get { return _postComments; } }
+        public IEnumerable<PostInterAction>? PostInterAction { get { return _postInterAction; } }
+
+
+        //factory method to create a new post
+        public static Post Create(string content, string mediaUrl, PostType postType, PrivacySetting privacySetting, Guid userProfileId)
+        {
+            return new Post
+            {
+                Content = content,
+                UserProfileId = userProfileId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+            };
+        }
+
+
+
+        public static void Update(Post post, string content, string mediaUrl, PostType postType, PrivacySetting privacySetting)
+        {
+            post.Content = content;
+            post.UpdatedAt = DateTime.UtcNow;
+        }
+
+
+
+        public void AddComment(PostComment comment)
+        {
+            _postComments.Add(comment);
+        }
+
+        public void RemoveComment(PostComment comment)
+        {
+            _postComments.Remove(comment);
+        }
+        public void AddInteraction(PostInterAction interaction)
+        {
+            _postInterAction.Add(interaction);
+        }
+        public void RemoveInteraction(PostInterAction interaction)
+        {
+            _postInterAction.Remove(interaction);
+        }
+
     }
 }
