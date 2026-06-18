@@ -1,11 +1,11 @@
-﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Http;
+﻿using API.Routes;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.V1
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route(ApiRoutes.BaseRoute)]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace API.Controllers.V1
             return Ok("Get all posts");
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(ApiRoutes.Post.GetById)]
         public IActionResult GetPostById(Guid id)
         {
             // Logic to retrieve a post by id
