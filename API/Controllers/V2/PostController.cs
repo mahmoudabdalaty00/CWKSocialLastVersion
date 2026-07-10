@@ -1,11 +1,12 @@
-﻿using Asp.Versioning;
+﻿using API.Routes;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.V2
 {
     [ApiVersion("2.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route(ApiRoutes.BaseRoute)]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -24,3 +25,5 @@ namespace API.Controllers.V2
         }
     }
 }
+ 
+ 

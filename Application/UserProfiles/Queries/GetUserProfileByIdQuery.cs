@@ -1,0 +1,14 @@
+﻿using Domain.Models.UserProfiles;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Application.UserProfiles.Queries
+{
+    public class GetUserProfileByIdQuery :IRequest<UserProfile>
+    {
+        public Guid UserProfileId { get; set; }
+
+    }
+}
