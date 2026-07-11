@@ -13,6 +13,7 @@ namespace Application.AutoMapper
         public UserProfileProfile()
         {
             CreateMap<CreateUserProfileCommand, BasicInfo>();
+            CreateMap<UpdateUserProfileCommand, BasicInfo>();
 
 
 

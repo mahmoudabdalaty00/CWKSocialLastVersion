@@ -11,6 +11,7 @@ namespace API.MappingProfiles
         public UserProfilesMappings()
         {
             CreateMap<UserProfileCreate, CreateUserProfileCommand>();
+            CreateMap<UserProfileUpdate, UpdateUserProfileCommand>();
             CreateMap<UserProfile, UserProfileResponse>();
             CreateMap<BasicInfo, BasicInformation>();
 

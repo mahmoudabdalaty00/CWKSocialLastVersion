@@ -35,6 +35,18 @@ namespace API.Controllers.V1
 
 
 
+
+        [HttpGet(ApiRoutes.UserProfiles.GetUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
+        public async Task<IActionResult> GetUserProfileById(string id)
+        {
+            var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
+            var response = await _mediator.Send(query);
+            var user = _mapper.Map<UserProfileResponse>(response);
+            return Ok(user);
+        }
+
+
+
         [HttpPost(ApiRoutes.UserProfiles.CreateUserProfile)]
         public async Task<IActionResult> CreateUserProfile([FromBody] UserProfileCreate userProfile)
         {
@@ -48,15 +60,35 @@ namespace API.Controllers.V1
         }
 
 
-
-        [HttpGet(ApiRoutes.UserProfiles.GetUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
-        public async Task<IActionResult> GetUserProfileById(string id)
+        [HttpPatch(ApiRoutes.UserProfiles.UpdateUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
+        public async Task<IActionResult> UpdateUserProfile(string id, [FromBody] UserProfileUpdate userProfile)
         {
-            var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
-            var response =await _mediator.Send(query);
-            var user = _mapper.Map<UserProfileResponse>(response);
-            return Ok(user);
+            var command = _mapper.Map<UpdateUserProfileCommand>(userProfile);
+            command.Id = Guid.Parse(id);
+            // Handle the command and return the result
+            await _mediator.Send(command);
+
+            return NoContent();
         }
+
+
+
+
+
+
+        [HttpDelete(ApiRoutes.UserProfiles.DeleteUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
+        public async Task<IActionResult> DeleteUserProfile(string id)
+        {
+            var command = new DeleteUserProfileCommand { Id = Guid.Parse(id) };
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+
+
+
+
+
 
 
 
