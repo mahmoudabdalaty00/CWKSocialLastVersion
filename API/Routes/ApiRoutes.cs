@@ -8,6 +8,9 @@
         public class UserProfiles
         {
             public const string IdRoute = "{id}";
+            public const string CreateUserProfile = "create_profile";
+            public const string GetUserProfile = "get_user";
+            public const string GetAllUsers = "get_all_users";
         }
 
 

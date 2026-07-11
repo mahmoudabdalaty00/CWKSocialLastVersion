@@ -1,4 +1,4 @@
-﻿using Application.UserProfiles.Queries;
+using Application.UserProfiles.Queries;
 
 namespace API.Registers
 {
@@ -6,7 +6,7 @@ namespace API.Registers
     {
         public void RegisterServices(WebApplicationBuilder builder)
         {
-            builder.Services.AddAutoMapper(typeof(GetAllUserProfilesQuery).Assembly);
+            builder.Services.AddAutoMapper(cfg => { }, typeof(GetAllUserProfilesQuery).Assembly, typeof(BogardRegister).Assembly);
 
             builder.Services.AddMediatR(cfg =>
             {

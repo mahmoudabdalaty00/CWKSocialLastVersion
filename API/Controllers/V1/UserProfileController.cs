@@ -1,4 +1,4 @@
-﻿using API.Contracts.UserProfile.Requests;
+using API.Contracts.UserProfile.Requests;
 using API.Contracts.UserProfile.Responses;
 using API.Routes;
 using Application.UserProfiles.Commands;
@@ -24,7 +24,7 @@ namespace API.Controllers.V1
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet(ApiRoutes.UserProfiles.GetAllUsers)]
         public async Task<IActionResult> GetAllProfiles()
         {
             var query = new GetAllUserProfilesQuery();
@@ -35,7 +35,7 @@ namespace API.Controllers.V1
 
 
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.UserProfiles.CreateUserProfile)]
         public async Task<IActionResult> CreateUserProfile([FromBody] UserProfileCreate userProfile)
         {
             var command = _mapper.Map<CreateUserProfileCommand>(userProfile);
@@ -49,11 +49,11 @@ namespace API.Controllers.V1
 
 
 
-        [HttpGet(ApiRoutes.UserProfiles.IdRoute)]
+        [HttpGet(ApiRoutes.UserProfiles.GetUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
         public async Task<IActionResult> GetUserProfileById(string id)
         {
             var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
-            var response = _mediator.Send(query);
+            var response =await _mediator.Send(query);
             var user = _mapper.Map<UserProfileResponse>(response);
             return Ok(user);
         }
