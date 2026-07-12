@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Application.UserProfiles.Commands
+namespace Application.Features.UserProfiles.Commands
 {
     public class DeleteUserProfileCommand : IRequest<Unit>
     {

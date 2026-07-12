@@ -1,10 +1,15 @@
-﻿using Domain.Models.UserProfiles;
+using Application.Models;
+using Domain.Models.UserProfiles;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Application.UserProfiles.Commands
+namespace Application.Features.UserProfiles.Commands
 {
-    public class CreateUserProfileCommand : IRequest<UserProfile>
+    public class UpdateUserProfileCommand : IRequest<OperationResult<UserProfile>>
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }

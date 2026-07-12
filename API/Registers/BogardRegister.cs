@@ -1,4 +1,4 @@
-using Application.UserProfiles.Queries;
+using Application.Features.UserProfiles.Queries;
 
 namespace API.Registers
 {

@@ -1,8 +1,8 @@
 using API.Contracts.UserProfile.Requests;
 using API.Contracts.UserProfile.Responses;
 using API.Routes;
-using Application.UserProfiles.Commands;
-using Application.UserProfiles.Queries;
+using Application.Features.UserProfiles.Commands;
+using Application.Features.UserProfiles.Queries;
 using Asp.Versioning;
 using AutoMapper;
 using MediatR;

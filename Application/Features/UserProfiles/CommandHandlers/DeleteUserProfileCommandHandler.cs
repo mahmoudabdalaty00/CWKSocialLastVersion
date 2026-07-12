@@ -1,8 +1,8 @@
-﻿using Application.UserProfiles.Commands;
+﻿using Application.Features.UserProfiles.Commands;
 using Data.MainDb;
 using MediatR;
 
-namespace Application.UserProfiles.CommandHandlers
+namespace Application.Features.UserProfiles.CommandHandlers
 {
     public class DeleteUserProfileCommandHandler : IRequestHandler<DeleteUserProfileCommand, Unit>
     {

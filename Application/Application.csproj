@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Posts\Commands\" />
-    <Folder Include="Posts\CommandHandlers\" />
-    <Folder Include="Posts\" />
-    <Folder Include="Posts\QueryHandlers\" />
-    <Folder Include="Posts\Queries\" />
+    <Folder Include="Features\Posts\Commands\" />
+    <Folder Include="Features\Posts\CommandHandlers\" />
+    <Folder Include="Features\Posts\" />
+    <Folder Include="Features\Posts\QueryHandlers\" />
+    <Folder Include="Features\Posts\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

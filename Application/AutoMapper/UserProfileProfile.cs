@@ -1,4 +1,4 @@
-﻿using Application.UserProfiles.Commands;
+﻿using Application.Features.UserProfiles.Commands;
 using AutoMapper;
 using Domain.Models.UserProfiles;
 using System;

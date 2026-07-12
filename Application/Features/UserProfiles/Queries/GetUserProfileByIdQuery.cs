@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.UserProfiles.Queries
+namespace Application.Features.UserProfiles.Queries
 {
     public class GetUserProfileByIdQuery :IRequest<UserProfile>
     {

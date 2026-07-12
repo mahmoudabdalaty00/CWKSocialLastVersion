@@ -1,11 +1,11 @@
-﻿using Application.UserProfiles.Commands;
+﻿using Application.Features.UserProfiles.Commands;
 using AutoMapper;
 using Data.MainDb;
 using Domain.Models.UserProfiles;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.UserProfiles.CommandHandlers
+namespace Application.Features.UserProfiles.CommandHandlers
 {
     public class CreateUserProfileCommandHandler : IRequestHandler<CreateUserProfileCommand, UserProfile>
     {

@@ -1,10 +1,10 @@
-﻿using Application.UserProfiles.Queries;
+﻿using Application.Features.UserProfiles.Queries;
 using Data.MainDb;
 using Domain.Models.UserProfiles;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.UserProfiles.QueryHandlers
+namespace Application.Features.UserProfiles.QueryHandlers
 {
     public class GetAllUserProfilesQueryHandler : IRequestHandler<GetAllUserProfilesQuery, IEnumerable<UserProfile>>
     {

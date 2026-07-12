@@ -1,6 +1,6 @@
 ﻿using API.Contracts.UserProfile.Requests;
 using API.Contracts.UserProfile.Responses;
-using Application.UserProfiles.Commands;
+using Application.Features.UserProfiles.Commands;
 using AutoMapper;
 using Domain.Models.UserProfiles;
 
