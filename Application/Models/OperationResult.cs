@@ -6,8 +6,8 @@ namespace Application.Models
 {
     public class OperationResult<T>
     {
-        public T PayLead { get; set; }
+        public T Result { get; set; }
         public bool IsError { get; set; } 
-        public List<string> Errors { get; set; } = new List<string>();
+        public List<Error> Errors { get; set; } = new List<Error>();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Features.UserProfiles.Commands;
 using Application.Models;
 using Data.MainDb;
+using Domain.Models.Conasts;
 using Domain.Models.UserProfiles;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -36,12 +37,17 @@ namespace Application.Features.UserProfiles.CommandHandlers
 
                 if (userProfile == null)
                 {
-                    result.PayLead = null;
+                    var error = new Error
+                    {
+                        Code =  ErrorCodes.NotFound,
+                        Message = $"User profile not found With UserId : {request.Id}.",
+                    };
+                    result.Result = null;
                     result.IsError = true;
-                    result.Errors = new List<string> { "User profile not found." };
+                    result.Errors.Add(error);
                     return result;
                 }
-                   
+
 
                 userProfile.UpdateBasicInfo(basicInfo);
 
@@ -49,19 +55,24 @@ namespace Application.Features.UserProfiles.CommandHandlers
                 _db.UserProfiles.Update(userProfile);
                 await _db.SaveChangesAsync(cancellationToken);
 
-                result.PayLead = userProfile;
+                result.Result = userProfile;
                 result.IsError = false;
-                    
 
-                return result;
+
             }
             catch (Exception ex)
             {
+                var error = new Error
+                {
+                    Code = ErrorCodes.ServerError,
+                    Message = ex.Message,
+                };
+                result.Errors.Add(error);
                 result.IsError = true;
-                result.Errors = new List<string> { ex.Message };
-                result.PayLead = null;
+                result.Result = null;
             }
 
+            return result;
 
         }
     }

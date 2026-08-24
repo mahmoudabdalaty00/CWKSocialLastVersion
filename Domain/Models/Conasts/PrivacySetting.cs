@@ -6,5 +6,4 @@
         FriendsOnly = 1,
         Private = 2
     }
-
 }
