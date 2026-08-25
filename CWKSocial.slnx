@@ -14,4 +14,7 @@
   <Folder Name="/IOC/">
     <Project Path="IOC/IOC.csproj" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Info.txt" />
+  </Folder>
 </Solution>
