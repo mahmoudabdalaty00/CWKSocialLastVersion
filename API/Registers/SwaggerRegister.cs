@@ -13,6 +13,7 @@ namespace API.Registers
             // Registers the Swagger Generator service. 
             // Because of the line above, we don't need to pass options here manually.
             builder.Services.AddSwaggerGen();
+
         }
     }
 }

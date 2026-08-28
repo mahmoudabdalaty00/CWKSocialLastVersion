@@ -1,5 +1,6 @@
 using API.Contracts.UserProfile.Requests;
 using API.Contracts.UserProfile.Responses;
+using API.Filters;
 using API.Routes;
 using Application.Features.UserProfiles.Commands;
 using Application.Features.UserProfiles.Queries;
@@ -56,6 +57,7 @@ namespace API.Controllers.V1
 
 
         [HttpPost(ApiRoutes.UserProfiles.CreateUserProfile)]
+        [ValidateModel]
         public async Task<IActionResult> CreateUserProfile([FromBody] UserProfileCreate userProfile)
         {
             var command = _mapper.Map<CreateUserProfileCommand>(userProfile);
