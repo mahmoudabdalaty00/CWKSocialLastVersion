@@ -5,7 +5,7 @@ using MediatR;
 namespace Application.Features.UserProfiles.Commands
 {
     public class CreateUserProfileCommand : IRequest<OperationResult<UserProfile>>
-    {
+    { 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }

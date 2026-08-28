@@ -1,4 +1,3 @@
-using API.Contracts.Common;
 using API.Contracts.UserProfile.Requests;
 using API.Contracts.UserProfile.Responses;
 using API.Routes;
@@ -6,7 +5,6 @@ using Application.Features.UserProfiles.Commands;
 using Application.Features.UserProfiles.Queries;
 using Asp.Versioning;
 using AutoMapper;
-using Domain.Models.Conasts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,10 +30,10 @@ namespace API.Controllers.V1
             var query = new GetAllUserProfilesQuery();
             var response = await _mediator.Send(query);
 
-            if (response == null)
-                return NotFound();
+            if (response.IsError)
+                return HandlerErrorResponse(response.Errors);
 
-            var userProfilesResponse = _mapper.Map<List<UserProfileResponse>>(response);
+            var userProfilesResponse = _mapper.Map<List<UserProfileResponse>>(response.Result);
             return Ok(userProfilesResponse);
         }
 
@@ -48,10 +46,10 @@ namespace API.Controllers.V1
             var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
             var response = await _mediator.Send(query);
 
-            if (response == null)
-                return NotFound();
+            if (response.IsError)
+                return HandlerErrorResponse(response.Errors);
 
-            var user = _mapper.Map<UserProfileResponse>(response);
+            var user = _mapper.Map<UserProfileResponse>(response.Result);
             return Ok(user);
         }
 
@@ -64,10 +62,10 @@ namespace API.Controllers.V1
             // Handle the command and return the result
             var response = await _mediator.Send(command);
 
-            if (response == null)
-                return NotFound();
+            if (response.IsError)
+                return HandlerErrorResponse(response.Errors);
 
-            var userProfileResponse = _mapper.Map<UserProfileResponse>(response);
+            var userProfileResponse = _mapper.Map<UserProfileResponse>(response.Result);
             return CreatedAtAction(
                 nameof(GetUserProfileById), new { userProfileResponse.Id }, userProfileResponse);
         }
@@ -81,7 +79,7 @@ namespace API.Controllers.V1
             command.Id = Guid.Parse(id);
             // Handle the command and return the result
             var response = await _mediator.Send(command);
-             
+
             return response.IsError ? HandlerErrorResponse(response.Errors) : Ok(response);
         }
 
@@ -98,10 +96,12 @@ namespace API.Controllers.V1
             if (command == null)
                 return NotFound();
 
-            await _mediator.Send(command);
+            var response = await _mediator.Send(command);
+            if (response.IsError)
+                return HandlerErrorResponse(response.Errors);
             return NoContent();
         }
 
-         
+
     }
 }

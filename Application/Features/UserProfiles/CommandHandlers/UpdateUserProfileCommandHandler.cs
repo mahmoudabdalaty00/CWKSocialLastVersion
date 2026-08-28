@@ -3,6 +3,7 @@ using Application.Models;
 using Data.MainDb;
 using Domain.Models.Conasts;
 using Domain.Models.UserProfiles;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,16 +12,24 @@ namespace Application.Features.UserProfiles.CommandHandlers
     public class UpdateUserProfileCommandHandler : IRequestHandler<UpdateUserProfileCommand, OperationResult<UserProfile>>
     {
         private readonly DataContext _db;
+        private readonly IValidator<UpdateUserProfileCommand> _validator;
 
-        public UpdateUserProfileCommandHandler(DataContext db)
+        public UpdateUserProfileCommandHandler(DataContext db, IValidator<UpdateUserProfileCommand> validator)
         {
             _db = db;
+            _validator = validator;
         }
 
         public async Task<OperationResult<UserProfile>> Handle(UpdateUserProfileCommand request, CancellationToken cancellationToken)
         {
 
             var result = new OperationResult<UserProfile>();
+            // 1. Run the validator directly
+            (bool flowControl, OperationResult<UserProfile> value) = await Validate(request, result, cancellationToken);
+            if (!flowControl)
+            {
+                return value;
+            }
             try
             {
                 var userProfile = await _db.UserProfiles.FirstOrDefaultAsync(up =>
@@ -39,7 +48,7 @@ namespace Application.Features.UserProfiles.CommandHandlers
                 {
                     var error = new Error
                     {
-                        Code =  ErrorCodes.NotFound,
+                        Code = ErrorCodes.NotFound,
                         Message = $"User profile not found With UserId : {request.Id}.",
                     };
                     result.Result = null;
@@ -74,6 +83,29 @@ namespace Application.Features.UserProfiles.CommandHandlers
 
             return result;
 
+        }
+
+        private async Task<(bool flowControl, OperationResult<UserProfile> value)> Validate(UpdateUserProfileCommand request, OperationResult<UserProfile> result, CancellationToken cancellationToken)
+        {
+            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+
+            // 2. Check if validation failed
+            if (!validationResult.IsValid)
+            {
+                result.IsError = true;
+                foreach (var failure in validationResult.Errors)
+                {
+                    result.Errors.Add(new Error
+                    {
+                        Code = ErrorCodes.ValidationError,
+                        Message = failure.ErrorMessage
+                    });
+                }
+
+                return (flowControl: false, value: result); // Stop execution early
+            }
+
+            return (flowControl: true, value: null);
         }
     }
 }

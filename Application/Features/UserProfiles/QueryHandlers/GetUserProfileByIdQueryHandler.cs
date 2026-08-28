@@ -19,7 +19,8 @@ namespace Application.Features.UserProfiles.QueryHandlers
 
         public async Task<OperationResult<UserProfile>> Handle(GetUserProfileByIdQuery request, CancellationToken cancellationToken)
         {
-            var user =await _db.UserProfiles.FirstOrDefaultAsync(u => u.Id == request.UserProfileId); 
+            var user =await _db.UserProfiles
+                .FirstOrDefaultAsync(u => u.Id == request.UserProfileId&& !u.IsDeleted); 
             var result = new OperationResult<UserProfile>();
             if(user == null)
             {
