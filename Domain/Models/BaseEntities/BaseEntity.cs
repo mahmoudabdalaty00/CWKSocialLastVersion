@@ -15,5 +15,26 @@ namespace Domain.Models.BaseEntities
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedAt { get; set; }
+
+
+
+
+        /// <summary>
+        /// Soft delete the entity
+        /// </summary>
+        public virtual void Delete()
+        {
+            IsDeleted = true;
+            DeletedAt = DateTime.UtcNow;
+        }
+
+        /// <summary>
+        /// Restore a soft-deleted entity
+        /// </summary>
+        public virtual void Restore()
+        {
+            IsDeleted = false;
+            DeletedAt = null;
+        }
     }
 }

@@ -35,11 +35,7 @@ namespace Domain.Models.Posts
         }
 
 
-
-
-
-
-
+         
 
     }
 }

@@ -4,17 +4,19 @@ using System.Text;
 
 namespace Domain.Exceptions
 {
-    public class UserProfileNotValideException :Exception
+    internal class UserProfileNotValideException : DomainValidationException
     {
-        internal UserProfileNotValideException()
+        public UserProfileNotValideException()
         {
-            ValidationErrors = new List<string>();
         }
-        internal UserProfileNotValideException(string message) : base(message)
+        public UserProfileNotValideException(string message) : base(message)
         {
-            ValidationErrors = new List<string>();
         }
 
-        public List<string> ValidationErrors { get; }
+        public UserProfileNotValideException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
     }
 }

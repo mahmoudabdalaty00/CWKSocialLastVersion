@@ -1,5 +1,7 @@
-﻿using Domain.Models.BaseEntities;
+﻿using Domain.Exceptions;
+using Domain.Models.BaseEntities;
 using Domain.Models.Conasts;
+using Domain.Viladators.PostValidators;
 using UserProfile = Domain.Models.UserProfiles.UserProfile;
 namespace Domain.Models.Posts
 {
@@ -24,13 +26,28 @@ namespace Domain.Models.Posts
         //factory method to create a new post
         public static Post Create(string content, string mediaUrl, PostType postType, PrivacySetting privacySetting, Guid userProfileId)
         {
-            return new Post
+
+            var validate = new PostValidator();
+            var post = new Post
             {
                 Content = content,
                 UserProfileId = userProfileId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
             };
+
+            var result = validate.Validate(post);
+            if (result.IsValid)
+                return post;
+
+
+
+            var exception =  new PostNotValideException("Post validation failed");
+            exception.ValidationErrors.AddRange(
+                result.Errors.Select(e => e.ErrorMessage));
+
+            throw exception;
+
         }
 
 

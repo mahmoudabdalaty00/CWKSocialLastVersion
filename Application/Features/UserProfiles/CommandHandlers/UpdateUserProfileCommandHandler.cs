@@ -1,6 +1,7 @@
 ﻿using Application.Features.UserProfiles.Commands;
 using Application.Models;
 using Data.MainDb;
+using Domain.Exceptions;
 using Domain.Models.Conasts;
 using Domain.Models.UserProfiles;
 using FluentValidation;
@@ -69,18 +70,24 @@ namespace Application.Features.UserProfiles.CommandHandlers
 
 
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
-                var error = new Error
-                {
-                    Code = ErrorCodes.ServerError,
-                    Message = ex.Message,
-                };
-                result.Errors.Add(error);
                 result.IsError = true;
-                result.Result = null;
+                result.Errors.Add(new Error { Code = ErrorCodes.DbError, Message = ex.Message });
             }
-
+            catch (ArgumentException ex) // BasicInfo.Create validation failures
+            {
+                result.IsError = true;
+                result.Errors.Add(new Error { Code = ErrorCodes.ValidationError, Message = ex.Message });
+            }
+            catch (UserProfileNotValideException ex)
+            {
+                result.IsError = true;
+                result.Errors.
+                    AddRange(ex.ValidationErrors
+                    .Select(error => new Error
+                    { Code = ErrorCodes.ValidationError, Message = error }));
+            }
             return result;
 
         }

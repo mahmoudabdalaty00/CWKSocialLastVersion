@@ -2,6 +2,7 @@
 using Application.Models;
 using AutoMapper;
 using Data.MainDb;
+using Domain.Exceptions;
 using Domain.Models.Conasts;
 using Domain.Models.UserProfiles;
 using FluentValidation;
@@ -57,6 +58,14 @@ namespace Application.Features.UserProfiles.CommandHandlers
             {
                 result.IsError = true;
                 result.Errors.Add(new Error { Code = ErrorCodes.ValidationError, Message = ex.Message });
+            }
+            catch(UserProfileNotValideException  ex)
+            {
+                result.IsError = true;
+                result.Errors.
+                    AddRange(ex.ValidationErrors
+                    .Select(error => new Error 
+                    { Code = ErrorCodes.ValidationError, Message = error }));
             }
 
             return result;

@@ -1,4 +1,6 @@
-﻿using Domain.Models.BaseEntities;
+﻿using Domain.Exceptions;
+using Domain.Models.BaseEntities;
+using Domain.Viladators.PostValidators;
 namespace Domain.Models.Posts
 {
     public class PostComment : BaseEntity<int>
@@ -16,14 +18,29 @@ namespace Domain.Models.Posts
         //Factyory method to create a new comment
         public static PostComment Create(int postId, string text, Guid userProfileId)
         {
-            return new PostComment
+
+            var validate = new PostCommentValidator();
+          
+            var post = new PostComment
             {
                 PostId = postId,
-                Text = text,
+                Text = text.Trim(),
                 UserProfileId = userProfileId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
             };
+
+            // Validate the post
+            var validationResult = validate.Validate(post);
+            if (validationResult.IsValid)
+              return post;
+
+            var exception = new PostCommentNotValideException("Invalid post comment.");
+             
+            exception.ValidationErrors.AddRange(
+                validationResult.Errors.Select(e => e.ErrorMessage));
+
+            throw exception;
         }
 
 

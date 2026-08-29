@@ -29,7 +29,7 @@ namespace Application.Features.UserProfiles.Validations
             RuleFor(x => x.EmailAddress)
                 .NotEmpty().WithMessage("Email address is required.")
                 .EmailAddress().WithMessage("A valid email address is required.")
-                .MaximumLength(100).WithMessage("Emannot exceed 100 characters.")il address ca
+                .MaximumLength(100).WithMessage("Email Address cannot exceed 100 characters.") 
                 .MustAsync(BeUniqueEmailForOtherUsers).WithMessage("This email address is already in use by another user.");
 
             RuleFor(x => x.Bio)
