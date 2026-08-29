@@ -27,4 +27,34 @@ namespace API.Filters
             }
         }
     }
+
+
+    public class ValidateGuidAttribute : ActionFilterAttribute
+    {
+        private readonly string _Key;
+
+        public ValidateGuidAttribute(string key)
+        {
+            _Key = key;
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (!context.ActionArguments.TryGetValue(_Key, out var value))
+                return;
+
+            if (Guid.TryParse(value?.ToString(), out var guidValue))
+                return;
+
+            var apiError = new ErrorResponse
+            {
+                StatusCode = 400,
+                StatusPhrase = "Bad Request",
+                TimeStamp = DateTime.UtcNow,
+            };
+
+            apiError.Errors.Add($"The parameter '{_Key}' is not a valid GUID.");
+            context.Result = new ObjectResult(apiError);
+        }
+    }
 }

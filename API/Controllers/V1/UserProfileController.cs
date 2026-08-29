@@ -40,7 +40,7 @@ namespace API.Controllers.V1
 
 
 
-
+        [ValidateGuid(ApiRoutes.UserProfiles.IdRoute)]
         [HttpGet(ApiRoutes.UserProfiles.GetUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
         public async Task<IActionResult> GetUserProfileById(string id)
         {
@@ -72,7 +72,9 @@ namespace API.Controllers.V1
                 nameof(GetUserProfileById), new { userProfileResponse.Id }, userProfileResponse);
         }
 
+        
 
+        [ValidateGuid(ApiRoutes.UserProfiles.IdRoute)]
         [HttpPatch(ApiRoutes.UserProfiles.UpdateUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
         public async Task<IActionResult> UpdateUserProfile(string id, [FromBody] UserProfileUpdate userProfile)
         {
@@ -90,6 +92,8 @@ namespace API.Controllers.V1
 
 
 
+
+        [ValidateGuid(ApiRoutes.UserProfiles.IdRoute)]
         [HttpDelete(ApiRoutes.UserProfiles.DeleteUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
         public async Task<IActionResult> DeleteUserProfile(string id)
         {

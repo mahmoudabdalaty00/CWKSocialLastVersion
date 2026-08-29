@@ -1,4 +1,7 @@
-﻿namespace Domain.Models.UserProfiles
+﻿using Domain.Exceptions;
+using Domain.Viladators.UserProfileValidators;
+
+namespace Domain.Models.UserProfiles
 {
     public class BasicInfo
     {
@@ -17,8 +20,8 @@
 
         public static BasicInfo Create(string firstName, string lastName, DateTime dateOfBirth, string bio, string phone, string emailAddress, string currentCity)
         {
-            //TO Do:Add Validation,error handling ,error notification
-            return new BasicInfo
+            
+            var basicInfo = new BasicInfo
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -28,8 +31,22 @@
                 EmailAddress = emailAddress,
                 CurrentCity = currentCity
             };
+
+            var validate = new BasicInfoValidate();
+
+            var validateResult = validate.Validate(basicInfo);
+
+            if (validateResult.IsValid)
+                return basicInfo;
+
+            var exception = new UserProfileNotValideException("BasicInfo is not valid");
+            foreach (var error in validateResult.Errors)
+            {
+                exception.ValidationErrors.Add(error.ErrorMessage);
+            }
+            throw exception;
         }
-         
+
 
     }
 }

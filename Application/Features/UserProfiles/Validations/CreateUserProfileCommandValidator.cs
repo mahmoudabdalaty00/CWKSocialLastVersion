@@ -17,11 +17,13 @@ namespace Application.Features.UserProfiles.Validations
             _context = context;
             RuleFor(x => x.FirstName)
             .NotEmpty().WithMessage("First name is required.")
-            .MaximumLength(50);
+            .MinimumLength(3).WithMessage("First name must be at least 3 characters.")
+            .MaximumLength(50).WithMessage("First name must be at most 50 characters.");
 
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("Last name is required.")
-                .MaximumLength(50);
+                .MinimumLength(3).WithMessage("Last name must be at least 3 characters.")
+                .MaximumLength(50).WithMessage("Last name must be at most 50 characters.");
 
             // Synchronous email format validation followed by Async database check
             RuleFor(x => x.EmailAddress)
@@ -30,7 +32,7 @@ namespace Application.Features.UserProfiles.Validations
                 .MustAsync(BeUniqueEmail).WithMessage("This email address is already registered.");
 
             RuleFor(x => x.DateOfBirth)
-                .NotEmpty()
+                .NotEmpty().WithMessage("Date of birth is required.")
                 .LessThan(DateTime.UtcNow).WithMessage("Date of birth must be in the past.");
         }
 

@@ -18,15 +18,18 @@ namespace Application.Features.UserProfiles.Validations
 
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("First name is required.")
+                .MinimumLength(3).WithMessage("First name must be at least 3 characters.")
                 .MaximumLength(50).WithMessage("First name cannot exceed 50 characters.");
 
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("Last name is required.")
+                .MinimumLength(3).WithMessage("Last name must be at least 3 characters.")
                 .MaximumLength(50).WithMessage("Last name cannot exceed 50 characters.");
 
             RuleFor(x => x.EmailAddress)
                 .NotEmpty().WithMessage("Email address is required.")
                 .EmailAddress().WithMessage("A valid email address is required.")
+                .MaximumLength(100).WithMessage("Emannot exceed 100 characters.")il address ca
                 .MustAsync(BeUniqueEmailForOtherUsers).WithMessage("This email address is already in use by another user.");
 
             RuleFor(x => x.Bio)
