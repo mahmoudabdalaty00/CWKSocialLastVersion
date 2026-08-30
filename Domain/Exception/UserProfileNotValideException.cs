@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Exceptions
 {
-    internal class UserProfileNotValideException : DomainValidationException
+    public class UserProfileNotValideException : DomainValidationException
     {
         public UserProfileNotValideException()
         {

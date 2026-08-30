@@ -1,6 +1,6 @@
 ﻿namespace Domain.Exceptions
 {
-    internal class PostNotValideException : DomainValidationException
+    public class PostNotValideException : DomainValidationException
     {
         public PostNotValideException()
         {
