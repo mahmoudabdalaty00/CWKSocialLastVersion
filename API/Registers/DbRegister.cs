@@ -7,10 +7,18 @@ namespace API.Registers
     {
         public void RegisterServices(WebApplicationBuilder builder)
         {
-            var cs = builder.Configuration.GetConnectionString("DefaultConnection");
+            //var cs = builder.Configuration.GetConnectionString("DefaultConnection");
+            //builder.Services.AddDbContext<DataContext>(options =>
+            //{
+            //    options.UseNpgsql(cs);
+            //});
+
+            var connectionString =
+               builder.Configuration.GetConnectionString("DefaultConnection");
+
             builder.Services.AddDbContext<DataContext>(options =>
             {
-                options.UseNpgsql(cs);
+                options.UseSqlServer(connectionString);
             });
         }
     }
