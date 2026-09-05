@@ -89,10 +89,6 @@ namespace API.Controllers.V1
 
 
 
-
-
-
-
         [ValidateGuid(ApiRoutes.UserProfiles.IdRoute)]
         [HttpDelete(ApiRoutes.UserProfiles.DeleteUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
         public async Task<IActionResult> DeleteUserProfile(string id)
