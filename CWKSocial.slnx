@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Admin/">
+    <Project Path="Admin/Admin.csproj" Id="768a861e-46ca-4dae-8f03-a5a1a4cfa546" />
+  </Folder>
   <Folder Name="/Api/">
     <Project Path="API/API.csproj" />
   </Folder>
