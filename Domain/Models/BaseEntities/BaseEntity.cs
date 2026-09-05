@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Domain.Models.BaseEntities
+﻿namespace Domain.Models.BaseEntities
 {
     public abstract class BaseEntity<TId>
     {
@@ -10,7 +6,7 @@ namespace Domain.Models.BaseEntities
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public bool IsDeleted { get; set; }
 
@@ -22,19 +18,24 @@ namespace Domain.Models.BaseEntities
         /// <summary>
         /// Soft delete the entity
         /// </summary>
+        protected void SetUpdatedAt() => UpdatedAt = DateTime.UtcNow;
+
         public virtual void Delete()
         {
             IsDeleted = true;
             DeletedAt = DateTime.UtcNow;
+            SetUpdatedAt();
         }
-
         /// <summary>
         /// Restore a soft-deleted entity
         /// </summary>
+
         public virtual void Restore()
         {
             IsDeleted = false;
             DeletedAt = null;
+            SetUpdatedAt();
         }
+
     }
 }
