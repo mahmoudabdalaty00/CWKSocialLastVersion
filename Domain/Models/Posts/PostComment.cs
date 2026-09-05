@@ -1,4 +1,4 @@
-﻿using Domain.Exceptions;
+using Domain.Exceptions;
 using Domain.Models.BaseEntities;
 using Domain.Viladators.PostValidators;
 namespace Domain.Models.Posts
@@ -44,6 +44,12 @@ namespace Domain.Models.Posts
         }
 
 
+
+        public static void Update(PostComment comment, string text)
+        {
+            comment.Text = text.Trim();
+            comment.UpdatedAt = DateTime.UtcNow;
+        }
 
         public static PostComment Update(string text)
         {

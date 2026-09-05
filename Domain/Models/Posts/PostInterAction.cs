@@ -1,4 +1,4 @@
-﻿using Domain.Models.BaseEntities;
+using Domain.Models.BaseEntities;
 using Domain.Models.Conasts;
 namespace Domain.Models.Posts
 {
@@ -25,6 +25,12 @@ namespace Domain.Models.Posts
             }
         }
 
+
+        public static void Update(PostInterAction interaction, ReactionType reaction)
+        {
+            interaction.ReactionType = reaction;
+            interaction.UpdatedAt = DateTime.UtcNow;
+        }
 
         public static PostInterAction Update(ReactionType reaction)
         {
