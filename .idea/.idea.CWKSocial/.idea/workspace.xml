@@ -17,16 +17,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27907ab9-5708-407a-98bb-23c9b5829aae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Admin/Registers/BogardRegister.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Service/DTOs/UserProfileDto/CreateUserProfileDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Service/DTOs/UserProfileDto/UpdateUserProfileDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Service/DTOs/UserProfileDto/UserProfileResponseDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Service/Implementation/Repositories/UserProfiles/UserProfileRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/Admin.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/Admin.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/AutoMapper/UserProfileProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/AutoMapper/UserProfileProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Models/BaseEntities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Models/BaseEntities/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Models/Error.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Models/Error.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Models/OperationResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Models/OperationResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Models/Posts/PostComment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Models/Posts/PostComment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Models/Posts/PostInterAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Models/Posts/PostInterAction.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +32,27 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "mahmoudabdalaty00"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mahmoudabdalaty00/CWKSocialLastVersion.git",
+    "accountId": "24db5789-0c06-42a3-b3c4-0aecb553deeb"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Application/Service/DTOs/UserProfiles/CreateUserProfileDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Application/Service/Implementation/Repositories/UserProfiles/UserProfileRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/hamouda/source/repos/CWKSocial/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/hamouda/source/repos/CWKSocial/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -150,9 +161,12 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Make UserProfile Repository &amp; Service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make UserProfile Repository &amp; Service" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
