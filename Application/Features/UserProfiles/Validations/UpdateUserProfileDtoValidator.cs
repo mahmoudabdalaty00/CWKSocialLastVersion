@@ -1,20 +1,18 @@
-﻿using Application.Features.UserProfiles.Commands;
+using Application.Features.UserProfiles.Commands;
+using Application.Service.DTOs.UserProfileDto;
 using Data.MainDb;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.UserProfiles.Validations
 {
-    public class UpdateUserProfileCommandValidator : AbstractValidator<UpdateUserProfileCommand>
+    public class UpdateUserProfileDtoValidator : AbstractValidator<UpdateUserProfileDto>
     {
         private readonly DataContext _context;
 
-        public UpdateUserProfileCommandValidator(DataContext context)
+        public UpdateUserProfileDtoValidator(DataContext context)
         {
             _context = context;
-
-            RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("User profile ID is required.");
 
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("First name is required.")
@@ -29,8 +27,7 @@ namespace Application.Features.UserProfiles.Validations
             RuleFor(x => x.EmailAddress)
                 .NotEmpty().WithMessage("Email address is required.")
                 .EmailAddress().WithMessage("A valid email address is required.")
-                .MaximumLength(100).WithMessage("Email Address cannot exceed 100 characters.") 
-                .MustAsync(BeUniqueEmailForOtherUsers).WithMessage("This email address is already in use by another user.");
+                .MaximumLength(100).WithMessage("Email Address cannot exceed 100 characters.");
 
             RuleFor(x => x.Bio)
                 .MaximumLength(500).WithMessage("Bio cannot exceed 500 characters.");
@@ -46,19 +43,6 @@ namespace Application.Features.UserProfiles.Validations
             RuleFor(x => x.DateOfBirth)
                 .NotEmpty().WithMessage("Date of birth is required.")
                 .LessThan(DateTime.UtcNow).WithMessage("Date of birth must be in the past.");
-        }
-
-        private async Task<bool> BeUniqueEmailForOtherUsers(UpdateUserProfileCommand command, string email, CancellationToken cancellationToken)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return true;
-
-            // Check if any OTHER user (different ID) has this email address
-            bool exists = await _context.UserProfiles
-                .AnyAsync(u => u.BasicInfo.EmailAddress.ToLower() == email.ToLower()
-                            && u.Id != command.Id, cancellationToken);
-
-            return !exists;
         }
     }
 }

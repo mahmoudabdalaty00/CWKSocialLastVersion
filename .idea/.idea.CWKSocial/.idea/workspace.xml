@@ -17,40 +17,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27907ab9-5708-407a-98bb-23c9b5829aae" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/API/Registers/RepositoryRegister.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Models/Error.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Models/Error.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Models/OperationResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Models/OperationResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/MappingProfiles/UserProfilesMappings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/MappingProfiles/UserProfilesMappings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Registers/MvcRegister.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Registers/MvcRegister.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/Registers/RepositoryRegister.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/Registers/RepositoryRegister.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/CreateUserProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/CreateUserProfileCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/DeleteUserProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/DeleteUserProfileCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/UpdateUserProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/UpdateUserProfileCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/CreateUserProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/CreateUserProfileCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/DeleteUserProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/DeleteUserProfileCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/UpdateUserProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/UpdateUserProfileCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetAllUserProfilesQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetAllUserProfilesQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetUserProfileByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetUserProfileByIdQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetAllUserProfilesQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetAllUserProfilesQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetUserProfileByIdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetUserProfileByIdQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Validations/CreateUserProfileCommandValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Validations/UpdateUserProfileCommandValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Models/Posts/PostComment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Models/Posts/PostComment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Models/Posts/PostInterAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Models/Posts/PostInterAction.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "mahmoudabdalaty00"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mahmoudabdalaty00&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mahmoudabdalaty00/CWKSocialLastVersion.git",
-    "accountId": "24db5789-0c06-42a3-b3c4-0aecb553deeb"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mahmoudabdalaty00/CWKSocialLastVersion.git&quot;,
+    &quot;accountId&quot;: &quot;24db5789-0c06-42a3-b3c4-0aecb553deeb&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Application/Service/DTOs/UserProfiles/CreateUserProfileDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d7e2ce30531b7a2d56142411c5e51c3d516aafcb44e7628167b959660a65c/ServiceProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Application/Service/Implementation/Repositories/UserProfiles/UserProfileRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/hamouda/source/repos/CWKSocial/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/hamouda/source/repos/CWKSocial/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -66,6 +81,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.Admin: http.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -74,15 +90,22 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Post__V1",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql",
+      "sqlserver.localdb"
+    ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.API: http">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Admin: http">
     <configuration name="API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/API/API.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net10.0" />
@@ -163,10 +186,23 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Make UserProfile Repository &amp; Service" />
     <option name="LAST_COMMIT_MESSAGE" value="Make UserProfile Repository &amp; Service" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -183,6 +219,19 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/API/Controllers/V1/UserProfileController.cs</url>
+          <line>61</line>
+          <properties documentPath="C:\Users\hamouda\source\repos\CWKSocial\API\Controllers\V1\UserProfileController.cs" containingFunctionPresentation="Method 'CreateUserProfile'">
+            <startOffsets>
+              <option value="1995" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1996" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

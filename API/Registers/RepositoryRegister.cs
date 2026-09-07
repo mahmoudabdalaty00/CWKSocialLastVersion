@@ -1,3 +1,8 @@
+using Application.Service.Implementation.Common;
+using Application.Service.Implementation.Services.UserProfileServices;
+using Application.Service.Interface.Common;
+using Application.Service.Interface.Services.UserProfileServices;
+
 namespace API.Registers;
 
 public class RepositoryRegister : IWebApplicationBuilderRegister

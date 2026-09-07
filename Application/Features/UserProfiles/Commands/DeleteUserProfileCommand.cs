@@ -1,10 +1,10 @@
 using Application.Models;
-using Domain.Models.UserProfiles;
+using Application.Service.DTOs.UserProfileDto;
 using MediatR;
 
 namespace Application.Features.UserProfiles.Commands
 {
-    public class DeleteUserProfileCommand : IRequest<OperationResult<UserProfile>>
+    public class DeleteUserProfileCommand : IRequest<OperationResult<UserProfileResponseDto>>
     {
         public Guid Id { get; set; }
     }

@@ -1,42 +1,25 @@
-﻿using Application.Features.UserProfiles.Queries;
+using Application.Features.UserProfiles.Queries;
 using Application.Models;
-using Data.MainDb;
-using Domain.Models.Conasts;
-using Domain.Models.UserProfiles;
+using Application.Service.DTOs.UserProfileDto;
+using Application.Service.Interface.Services.UserProfileServices;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Features.UserProfiles.QueryHandlers
 {
-    public class GetUserProfileByIdQueryHandler : IRequestHandler<GetUserProfileByIdQuery, OperationResult<UserProfile>>
+    public class GetUserProfileByIdQueryHandler : IRequestHandler<GetUserProfileByIdQuery, OperationResult<UserProfileResponseDto>>
     {
-        private readonly DataContext _db;
+        private readonly IUserProfileService _userProfileService;
 
-        public GetUserProfileByIdQueryHandler(DataContext db)
+        public GetUserProfileByIdQueryHandler(IUserProfileService userProfileService)
         {
-            _db = db;
+            _userProfileService = userProfileService;
         }
 
-        public async Task<OperationResult<UserProfile>> Handle(GetUserProfileByIdQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<UserProfileResponseDto>> Handle(GetUserProfileByIdQuery request, CancellationToken cancellationToken)
         {
-            var user =await _db.UserProfiles
-                .FirstOrDefaultAsync(u => u.Id == request.UserProfileId&& !u.IsDeleted); 
-            var result = new OperationResult<UserProfile>();
-            if(user == null)
-            {
-                var error = new Error
-                {
-                    Code = ErrorCodes.NotFound,
-                    Message = $"User profile not found With UserId : {request.UserProfileId}.",
-                };
-                result.Result = null;
-                result.IsError = true;
-                result.Errors.Add(error);
-                return result;
-            }
-            result.Result = user;
-            result.IsError = false;
-            return result;
+            return await _userProfileService.GetByIdAsync(request.UserProfileId);
         }
     }
 }

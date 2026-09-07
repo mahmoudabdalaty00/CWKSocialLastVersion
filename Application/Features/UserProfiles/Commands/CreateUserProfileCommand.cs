@@ -1,10 +1,10 @@
-﻿using Application.Models;
-using Domain.Models.UserProfiles;
+using Application.Models;
+using Application.Service.DTOs.UserProfileDto;
 using MediatR;
 
 namespace Application.Features.UserProfiles.Commands
 {
-    public class CreateUserProfileCommand : IRequest<OperationResult<UserProfile>>
+    public class CreateUserProfileCommand : IRequest<OperationResult<UserProfileResponseDto>>
     { 
         public string FirstName { get; set; }
         public string LastName { get; set; }

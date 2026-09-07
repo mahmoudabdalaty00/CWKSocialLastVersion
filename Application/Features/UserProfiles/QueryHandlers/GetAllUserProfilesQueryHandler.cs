@@ -1,33 +1,26 @@
-﻿using Application.Features.UserProfiles.Queries;
+using Application.Features.UserProfiles.Queries;
 using Application.Models;
-using Data.MainDb;
-using Domain.Models.UserProfiles;
+using Application.Service.DTOs.UserProfileDto;
+using Application.Service.Interface.Services.UserProfileServices;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens.Experimental;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Features.UserProfiles.QueryHandlers
 {
-    public class GetAllUserProfilesQueryHandler : IRequestHandler<GetAllUserProfilesQuery, OperationResult<IEnumerable<UserProfile>>>
+    public class GetAllUserProfilesQueryHandler : IRequestHandler<GetAllUserProfilesQuery, OperationResult<IEnumerable<UserProfileResponseDto>>>
     {
-        private readonly DataContext _dbContext;
+        private readonly IUserProfileService _userProfileService;
 
-        public GetAllUserProfilesQueryHandler(DataContext dbContext)
+        public GetAllUserProfilesQueryHandler(IUserProfileService userProfileService)
         {
-            _dbContext = dbContext;
+            _userProfileService = userProfileService;
         }
 
-        public async Task<OperationResult<IEnumerable<UserProfile>>> Handle(GetAllUserProfilesQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IEnumerable<UserProfileResponseDto>>> Handle(GetAllUserProfilesQuery request, CancellationToken cancellationToken)
         {
-            var users = await _dbContext.UserProfiles.ToListAsync();
-            var result = new OperationResult<IEnumerable<UserProfile>>
-            {
-                Result = users,
-                IsError = false,
-                Errors = new List<Error>()
-            };
-            return result;
-
+            return await _userProfileService.GetAllAsync();
         }
     }
 }

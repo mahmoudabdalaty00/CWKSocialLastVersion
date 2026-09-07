@@ -1,4 +1,5 @@
-﻿using Application.Features.UserProfiles.Commands;
+using Application.Features.UserProfiles.Commands;
+using Application.Service.DTOs.UserProfileDto;
 using Data.MainDb;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,11 @@ using System.Text;
 
 namespace Application.Features.UserProfiles.Validations
 {
-    public class CreateUserProfileCommandValidator : AbstractValidator<CreateUserProfileCommand>
+    public class CreateUserProfileDtoValidator : AbstractValidator<CreateUserProfileDto>
     {
         private readonly DataContext _context;
 
-        public CreateUserProfileCommandValidator(DataContext context)
+        public CreateUserProfileDtoValidator(DataContext context)
         {
             _context = context;
             RuleFor(x => x.FirstName)
@@ -30,6 +31,12 @@ namespace Application.Features.UserProfiles.Validations
                 .NotEmpty().WithMessage("Email address is required.")
                 .EmailAddress().WithMessage("A valid email address is required.")
                 .MustAsync(BeUniqueEmail).WithMessage("This email address is already registered.");
+
+            RuleFor(x => x.Phone)
+            .Matches(@"^\+?[1-9]\d{1,14}$")
+            .WithMessage("Phone number must be a valid international format.")
+            .When(x => !string.IsNullOrEmpty(x.Phone));
+
 
             RuleFor(x => x.DateOfBirth)
                 .NotEmpty().WithMessage("Date of birth is required.")

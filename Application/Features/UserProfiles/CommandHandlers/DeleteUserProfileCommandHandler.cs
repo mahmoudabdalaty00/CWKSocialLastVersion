@@ -1,49 +1,25 @@
-﻿using Application.Features.UserProfiles.Commands;
+using Application.Features.UserProfiles.Commands;
 using Application.Models;
-using Data.MainDb;
-using Domain.Models.Conasts;
-using Domain.Models.UserProfiles;
+using Application.Service.DTOs.UserProfileDto;
+using Application.Service.Interface.Services.UserProfileServices;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Features.UserProfiles.CommandHandlers
 {
-    public class DeleteUserProfileCommandHandler : IRequestHandler<DeleteUserProfileCommand, OperationResult<UserProfile>>
+    public class DeleteUserProfileCommandHandler : IRequestHandler<DeleteUserProfileCommand, OperationResult<UserProfileResponseDto>>
     {
-        private readonly DataContext _db;
+        private readonly IUserProfileService _userProfileService;
 
-        public DeleteUserProfileCommandHandler(DataContext db)
+        public DeleteUserProfileCommandHandler(IUserProfileService userProfileService)
         {
-            _db = db;
+            _userProfileService = userProfileService;
         }
 
-        public async Task<OperationResult<UserProfile>> Handle(DeleteUserProfileCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<UserProfileResponseDto>> Handle(DeleteUserProfileCommand request, CancellationToken cancellationToken)
         {
-            var profile = _db.UserProfiles.FirstOrDefault(x => x.Id == request.Id);
-
-            var result = new OperationResult<UserProfile>();
-            if(profile == null) 
-            {
-                var error = new Error
-                {
-                    Code = ErrorCodes.NotFound,
-                    Message = $"User profile not found With UserId : {request.Id}.",
-                };
-                result.Result = null;
-                result.IsError = true;
-                result.Errors.Add(error);
-                return result;
-            }
-
-
-            profile.IsDeleted = true;
-            profile.DeletedAt = DateTime.UtcNow;
-
-            _db.UserProfiles.Update(profile);
-            await  _db.SaveChangesAsync();
-
-            result.Result = profile;
-            result.IsError = false;
-            return result;
+            return await _userProfileService.DeleteAsync(request.Id);
         }
     }
 }

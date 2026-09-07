@@ -1,4 +1,4 @@
-﻿using API.Filters;
+using API.Filters;
 using Application.Features.UserProfiles.Validations;
 using FluentValidation;
 namespace API.Registers
@@ -12,7 +12,7 @@ namespace API.Registers
                 config.Filters.Add(typeof(CWKSocialExceptionHandler));
             });
 
-            builder.Services.AddValidatorsFromAssemblyContaining<CreateUserProfileCommandValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateUserProfileDtoValidator>();
 
         }
     }
