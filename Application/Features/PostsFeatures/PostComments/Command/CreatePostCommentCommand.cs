@@ -1,0 +1,13 @@
+using Application.Models;
+using Application.Service.DTOs.PostCommentDto;
+using MediatR;
+
+namespace Application.Features.PostsFeatures.PostComments.Command
+{
+    public class CreatePostCommentCommand : IRequest<OperationResult<PostCommentResponseDto>>
+    {
+        public Guid PostId { get; set; }
+        public string Text { get; set; } = string.Empty;
+        public Guid UserProfileId { get; set; }
+    }
+}

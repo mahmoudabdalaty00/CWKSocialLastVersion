@@ -17,25 +17,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27907ab9-5708-407a-98bb-23c9b5829aae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/API/Registers/RepositoryRegister.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/MappingProfiles/UserProfilesMappings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/MappingProfiles/UserProfilesMappings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Registers/MvcRegister.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Registers/MvcRegister.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Admin/Registers/RepositoryRegister.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/Registers/RepositoryRegister.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/CreateUserProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/CreateUserProfileCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/DeleteUserProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/DeleteUserProfileCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/UpdateUserProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/CommandHandlers/UpdateUserProfileCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/CreateUserProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/CreateUserProfileCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/DeleteUserProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/DeleteUserProfileCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/UpdateUserProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Commands/UpdateUserProfileCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetAllUserProfilesQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetAllUserProfilesQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetUserProfileByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/Queries/GetUserProfileByIdQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetAllUserProfilesQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetAllUserProfilesQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetUserProfileByIdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Features/UserProfiles/QueryHandlers/GetUserProfileByIdQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Validations/CreateUserProfileCommandValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Features/UserProfiles/Validations/UpdateUserProfileCommandValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Service/Implementation/Services/UserProfileServices/UserProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Service/Interface/Services/UserProfileServices/IUserProfileService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Controllers/V1/PostController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Controllers/V1/PostController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Routes/ApiRoutes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Routes/ApiRoutes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Application.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +67,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.Admin: http.executor": "Run",
+    ".NET Launch Settings Profile.Admin: http.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -96,7 +82,8 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.qodana"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -105,6 +92,30 @@
     ]
   }
 }]]></component>
+  <component name="QodanaCloudProjectLink">
+    <option name="lastReportId" value="NgEv9y" />
+    <option name="linkedProjectId" value="B5LZ7" />
+    <option name="linkedProjectName" value="CWKSocial" />
+    <option name="organizationId" value="7x6kw" />
+    <option name="userId" value="aYbD5" />
+  </component>
+  <component name="QodanaHighlightedReportService">
+    <option name="localRunNotPublishedPersistedInfo">
+      <LocalReportPersistedInfo>
+        <option name="path" value="C:\Users\hamouda\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
+        <option name="reportGuid" value="c509c314-516d-4273-b71d-961778e5687f" />
+        <option name="reportName" value="CWKSocial/qodana/٢٠٢٦-٠٩-٠٧" />
+      </LocalReportPersistedInfo>
+    </option>
+  </component>
+  <component name="QodanaIsSelectedPersistenceService">
+    <option name="selectedOrLoading" value="true" />
+  </component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\hamouda\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="c509c314-516d-4273-b71d-961778e5687f" reportId="CWKSocial/qodana/٢٠٢٦-٠٩-٠٧" />
+    </option>
+  </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Admin: http">
     <configuration name="API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/API/API.csproj" />
@@ -219,7 +230,7 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+        <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/API/Controllers/V1/UserProfileController.cs</url>
           <line>61</line>
           <properties documentPath="C:\Users\hamouda\source\repos\CWKSocial\API\Controllers\V1\UserProfileController.cs" containingFunctionPresentation="Method 'CreateUserProfile'">
@@ -234,5 +245,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

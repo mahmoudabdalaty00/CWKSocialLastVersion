@@ -15,11 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Posts\Commands\" />
-    <Folder Include="Features\Posts\CommandHandlers\" />
-    <Folder Include="Features\Posts\" />
-    <Folder Include="Features\Posts\QueryHandlers\" />
-    <Folder Include="Features\Posts\Queries\" />
+    <Folder Include="Features\PostsFeatures\PostComments\CommandHandler\" />
+    <Folder Include="Features\PostsFeatures\PostComments\QueriesHandlers\" />
+    <Folder Include="Features\PostsFeatures\PostInteractions\CommandHandler\" />
+    <Folder Include="Features\PostsFeatures\PostInteractions\QueriesHandlers\" />
+    <Folder Include="Features\PostsFeatures\Posts\CommandHandlers\" />
+    <Folder Include="Features\PostsFeatures\Posts\QueryHandlers\" />
   </ItemGroup>
 
   <ItemGroup>
