@@ -1,0 +1,17 @@
+@model PostCommentListItemViewModel
+@{ ViewData["Title"] = "Delete comment"; }
+
+<div class="admin-confirm">
+    <h1>Delete this comment?</h1>
+    <p class="text-break">@Model.Text</p>
+
+    <form asp-action="Delete" asp-route-id="@Model.Id">
+        @Html.AntiForgeryToken()
+        <div class="d-flex gap-2">
+            <button class="btn btn-danger" type="submit">Delete comment</button>
+            <a class="btn btn-outline-secondary"
+               asp-action="Details"
+               asp-route-id="@Model.Id">Cancel</a>
+        </div>
+    </form>
+</div>

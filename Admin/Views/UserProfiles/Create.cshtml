@@ -1,0 +1,22 @@
+@model UserProfileFormViewModel
+@{ ViewData["Title"] = "Add profile"; ViewData["Create"] = true; }
+
+<div class="admin-page-header">
+    <div>
+        <h1>Add profile</h1>
+        <p>Create a user profile for an identity account.</p>
+    </div>
+</div>
+
+<form asp-action="Create" class="admin-form">
+    @Html.AntiForgeryToken()
+    <partial name="_Form" model="Model" />
+    <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">Create profile</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

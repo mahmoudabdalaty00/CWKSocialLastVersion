@@ -1,0 +1,37 @@
+@model PostFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+<div class="row g-3">
+    <div class="col-12">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content" rows="6" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="UserProfileId" class="form-label"></label>
+        <input asp-for="UserProfileId" class="form-control" />
+        <span asp-validation-for="UserProfileId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="MediaUrl" class="form-label"></label>
+        <input asp-for="MediaUrl" class="form-control" />
+        <span asp-validation-for="MediaUrl" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="PostType" class="form-label"></label>
+        <select asp-for="PostType"
+                asp-items="Html.GetEnumSelectList<Domain.Models.Conasts.PostType>()"
+                class="form-select"></select>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="PrivacySetting" class="form-label"></label>
+        <select asp-for="PrivacySetting"
+                asp-items="Html.GetEnumSelectList<Domain.Models.Conasts.PrivacySetting>()"
+                class="form-select"></select>
+    </div>
+</div>

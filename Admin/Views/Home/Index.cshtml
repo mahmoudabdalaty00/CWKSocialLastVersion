@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="admin-dashboard" aria-labelledby="dashboard-title">
+    <div class="admin-page-header">
+        <div>
+            <h1 id="dashboard-title">CWK Social Admin</h1>
+            <p>Manage community profiles, content, and post engagement.</p>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <article class="admin-card h-100">
+                <h2>User profiles</h2>
+                <p>Review profile details and manage user information.</p>
+                <a class="btn btn-primary" asp-route="profiles">Manage profiles</a>
+            </article>
+        </div>
+        <div class="col-md-6">
+            <article class="admin-card h-100">
+                <h2>Posts</h2>
+                <p>Review and moderate published social content.</p>
+                <a class="btn btn-primary" asp-route="posts">Manage posts</a>
+            </article>
+        </div>
+    </div>
+
+    <p class="admin-help-text">Open a post to manage its comments and interactions.</p>
+</section>

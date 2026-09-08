@@ -1,5 +1,8 @@
 ﻿using Admin.Registers.Interface;
 
+using Application.Features.UserProfiles.Validations;
+using FluentValidation;
+
 namespace Admin.Registers
 {
     /// <summary>
@@ -10,6 +13,7 @@ namespace Admin.Registers
         public void RegisterServices(WebApplicationBuilder builder)
         {
             builder.Services.AddControllersWithViews();
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateUserProfileDtoValidator>();
         }
     }
 

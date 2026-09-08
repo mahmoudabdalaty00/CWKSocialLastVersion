@@ -1,0 +1,29 @@
+@model PostCommentListItemViewModel
+@{ ViewData["Title"] = "Comment #" + Model.Id; }
+
+<div class="admin-page-header">
+    <div>
+        <h1>Comment #@Model.Id</h1>
+        <p>Post #@Model.PostId</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    </div>
+</div>
+
+<article class="admin-card text-break">
+    @Model.Text
+</article>
+
+<dl class="admin-details">
+    <dt>Author</dt>
+    <dd><code>@Model.UserProfileId</code></dd>
+    <dt>Created</dt>
+    <dd>@Model.CreatedAt.ToLocalTime().ToString("g")</dd>
+</dl>
+
+<a class="btn btn-outline-secondary"
+   asp-controller="PostComments"
+   asp-action="Index"
+   asp-route-postId="@Model.PostId">Back to comments</a>

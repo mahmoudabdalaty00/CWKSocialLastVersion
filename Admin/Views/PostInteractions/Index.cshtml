@@ -1,0 +1,41 @@
+@model IEnumerable<PostInteractionListItemViewModel>
+@{
+    ViewData["Title"] = "Post interactions";
+    var postId = (int)ViewBag.PostId;
+}
+
+<div class="admin-page-header">
+    <div>
+        <h1>Interactions</h1>
+        <p>Reactions recorded for this post.</p>
+    </div>
+    <a class="btn btn-primary"
+       asp-action="Create"
+       asp-route-postId="@postId">Add interaction</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table admin-table">
+        <thead>
+            <tr>
+                <th>Reaction</th>
+                <th>Created</th>
+                <th><span class="visually-hidden">Actions</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ReactionType</td>
+                    <td>@item.CreatedAt.ToLocalTime().ToString("g")</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary"
+                           asp-action="Details"
+                           asp-route-id="@item.Id">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

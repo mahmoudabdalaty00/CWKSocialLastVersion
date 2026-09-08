@@ -1,0 +1,32 @@
+@model UserProfileDetailsViewModel
+@{ ViewData["Title"] = Model.FullName; }
+
+<div class="admin-page-header">
+    <div>
+        <h1>@Model.FullName</h1>
+        <p>@Model.EmailAddress · @Model.CurrentCity</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    </div>
+</div>
+
+<dl class="admin-details">
+    <dt>Identity ID</dt>
+    <dd class="text-break">@Model.IdentityUserId</dd>
+
+    <dt>Date of birth</dt>
+    <dd>@Model.DateOfBirth.ToString("d")</dd>
+
+    <dt>Phone</dt>
+    <dd>@Model.Phone</dd>
+
+    <dt>Bio</dt>
+    <dd>@Model.Bio</dd>
+
+    <dt>Joined</dt>
+    <dd>@Model.CreatedAt.ToLocalTime().ToString("g")</dd>
+</dl>
+
+<a class="btn btn-outline-secondary" asp-action="Index">Back to profiles</a>

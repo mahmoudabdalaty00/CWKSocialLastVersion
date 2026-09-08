@@ -17,11 +17,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27907ab9-5708-407a-98bb-23c9b5829aae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Admin/Registers/DbRegister.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CWKSocial/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Controllers/V1/PostController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Controllers/V1/PostController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Routes/ApiRoutes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Routes/ApiRoutes.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Admin/Registers/MvcRegister.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Admin/Registers/MvcRegister.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +65,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.API: https.executor": "Run",
     ".NET Launch Settings Profile.Admin: http.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -83,7 +82,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.qodana"
+    "settings.editor.selected.configurable": "preferences.keymap"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -93,30 +92,17 @@
   }
 }]]></component>
   <component name="QodanaCloudProjectLink">
-    <option name="lastReportId" value="NgEv9y" />
     <option name="linkedProjectId" value="B5LZ7" />
     <option name="linkedProjectName" value="CWKSocial" />
     <option name="organizationId" value="7x6kw" />
     <option name="userId" value="aYbD5" />
-  </component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="C:\Users\hamouda\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
-        <option name="reportGuid" value="c509c314-516d-4273-b71d-961778e5687f" />
-        <option name="reportName" value="CWKSocial/qodana/٢٠٢٦-٠٩-٠٧" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
   </component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="C:\Users\hamouda\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="c509c314-516d-4273-b71d-961778e5687f" reportId="CWKSocial/qodana/٢٠٢٦-٠٩-٠٧" />
     </option>
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Admin: http">
+  <component name="RunManager" selected=".NET Launch Settings Profile.API: https">
     <configuration name="API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/API/API.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net10.0" />
@@ -202,7 +188,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Post_V1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

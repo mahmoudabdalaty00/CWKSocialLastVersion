@@ -1,0 +1,23 @@
+@model PostCommentFormViewModel
+@{ ViewData["Title"] = "Edit comment"; }
+
+<div class="admin-page-header">
+    <div>
+        <h1>Edit comment</h1>
+    </div>
+</div>
+
+<form asp-action="Edit" class="admin-form">
+    @Html.AntiForgeryToken()
+    <partial name="_Form" model="Model" />
+    <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">Save changes</button>
+        <a class="btn btn-outline-secondary"
+           asp-action="Index"
+           asp-route-postId="@Model.PostId">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

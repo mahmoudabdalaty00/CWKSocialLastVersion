@@ -1,0 +1,38 @@
+@model IEnumerable<PostListItemViewModel>
+@{ ViewData["Title"] = "Posts"; }
+
+<div class="admin-page-header">
+    <div>
+        <h1>Posts</h1>
+        <p>Review published social content.</p>
+    </div>
+    <a class="btn btn-primary" asp-action="Create">Create post</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table admin-table">
+        <thead>
+            <tr>
+                <th>Content</th>
+                <th>Author</th>
+                <th>Published</th>
+                <th><span class="visually-hidden">Actions</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-truncate admin-content">@item.Content</td>
+                    <td><code>@item.UserProfileId</code></td>
+                    <td>@item.CreatedAt.ToLocalTime().ToString("g")</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary"
+                           asp-action="Details"
+                           asp-route-id="@item.Id">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

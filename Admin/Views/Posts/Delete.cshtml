@@ -1,0 +1,19 @@
+@model PostDetailsViewModel
+@{ ViewData["Title"] = "Delete post"; }
+
+<div class="admin-confirm">
+    <h1>Delete post #@Model.Id?</h1>
+    <p>The post will be soft-deleted and removed from active listings.</p>
+
+    <div class="mb-3 admin-card">
+        <p class="text-break mb-0">@Model.Content</p>
+    </div>
+
+    <form asp-action="Delete" asp-route-id="@Model.Id">
+        @Html.AntiForgeryToken()
+        <div class="d-flex gap-2">
+            <button class="btn btn-danger" type="submit">Delete post</button>
+            <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+        </div>
+    </form>
+</div>

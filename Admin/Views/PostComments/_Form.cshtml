@@ -1,0 +1,17 @@
+@model PostCommentFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+<input asp-for="PostId" type="hidden" />
+
+<div class="mb-3">
+    <label asp-for="UserProfileId" class="form-label"></label>
+    <input asp-for="UserProfileId" class="form-control" />
+    <span asp-validation-for="UserProfileId" class="text-danger"></span>
+</div>
+
+<div>
+    <label asp-for="Text" class="form-label"></label>
+    <textarea asp-for="Text" rows="5" class="form-control"></textarea>
+    <span asp-validation-for="Text" class="text-danger"></span>
+</div>

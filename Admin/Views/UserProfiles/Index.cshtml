@@ -1,0 +1,40 @@
+@model IEnumerable<UserProfileListItemViewModel>
+@{ ViewData["Title"] = "User profiles"; }
+
+<div class="admin-page-header">
+    <div>
+        <h1>User profiles</h1>
+        <p>Manage the people behind CWK Social.</p>
+    </div>
+    <a class="btn btn-primary" asp-action="Create">Add profile</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table admin-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Joined</th>
+                <th><span class="visually-hidden">Actions</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.EmailAddress</td>
+                    <td>@item.CurrentCity</td>
+                    <td>@item.CreatedAt.ToLocalTime().ToString("d")</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary"
+                           asp-action="Details"
+                           asp-route-id="@item.Id">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

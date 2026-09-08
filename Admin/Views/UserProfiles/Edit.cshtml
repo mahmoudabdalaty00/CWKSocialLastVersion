@@ -1,0 +1,22 @@
+@model UserProfileFormViewModel
+@{ ViewData["Title"] = "Edit profile"; }
+
+<div class="admin-page-header">
+    <div>
+        <h1>Edit profile</h1>
+        <p>Update profile contact and personal information.</p>
+    </div>
+</div>
+
+<form asp-action="Edit" class="admin-form">
+    @Html.AntiForgeryToken()
+    <partial name="_Form" model="Model" />
+    <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">Save changes</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

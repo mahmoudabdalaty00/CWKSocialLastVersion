@@ -1,0 +1,13 @@
+@model PostInteractionFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+<input asp-for="PostId" type="hidden" />
+
+<div>
+    <label asp-for="ReactionType" class="form-label"></label>
+    <select asp-for="ReactionType"
+            asp-items="Html.GetEnumSelectList<Domain.Models.Conasts.ReactionType>()"
+            class="form-select"></select>
+    <span asp-validation-for="ReactionType" class="text-danger"></span>
+</div>
