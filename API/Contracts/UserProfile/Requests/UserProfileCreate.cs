@@ -9,7 +9,7 @@
         public string EmailAddress { get; set; }
         public string Phone { get; set; }
         public string CurrentCity { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
 
     }
