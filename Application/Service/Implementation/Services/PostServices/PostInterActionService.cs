@@ -54,11 +54,18 @@ public class PostInterActionService : IPostInterActionService
         if (interaction == null)
             throw new KeyNotFoundException($"PostInterAction with ID {id} not found.");
 
-        PostInterAction.Update(interaction, dto.ReactionType);
+        try
+        {
+            interaction.Update(dto.ReactionType);
+            _unitOfWork.PostInterActionRepository.Update(interaction);
 
-        _unitOfWork.PostInterActionRepository.Update(interaction);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Failed to update PostInterAction with ID {id}.", ex);
+        }
+       
         await _unitOfWork.SaveChangesAsync();
-
         return _mapper.Map<PostInterActionResponseDto>(interaction);
     }
 

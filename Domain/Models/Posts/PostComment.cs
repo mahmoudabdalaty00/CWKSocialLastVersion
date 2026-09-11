@@ -1,6 +1,8 @@
 using Domain.Exceptions;
 using Domain.Models.BaseEntities;
+using Domain.Models.UserProfiles;
 using Domain.Viladators.PostValidators;
+using static System.Net.Mime.MediaTypeNames;
 namespace Domain.Models.Posts
 {
     public class PostComment : BaseEntity<int>
@@ -11,52 +13,62 @@ namespace Domain.Models.Posts
         }
 
         public int PostId { get; private set; }
-        public string Text { get; private set; }
+        public string Comment { get; private set; }
         public Guid UserProfileId { get; private set; }
+        public Post? Post { get; private set; }
+        public UserProfile? UserProfile { get; private set; }
 
 
         //Factyory method to create a new comment
         public static PostComment Create(int postId, string text, Guid userProfileId)
         {
+            if (postId <= 0)
+                throw new ArgumentException("PostId Not Valid", nameof(postId));
+            if (string.IsNullOrWhiteSpace(text))
+                throw new ArgumentException("Comment cannot be empty", nameof(text));
+            if (userProfileId == Guid.Empty)
+                throw new ArgumentException("UserProfileId cannot be empty", nameof(userProfileId));
 
-            var validate = new PostCommentValidator();
-          
+
             var post = new PostComment
             {
                 PostId = postId,
-                Text = text.Trim(),
+                Comment = text.Trim(),
                 UserProfileId = userProfileId,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
             };
 
             // Validate the post
+            var validate = new PostCommentValidator();
             var validationResult = validate.Validate(post);
-            if (validationResult.IsValid)
-              return post;
-
-            var exception = new PostCommentNotValideException("Invalid post comment.");
-             
-            exception.ValidationErrors.AddRange(
-                validationResult.Errors.Select(e => e.ErrorMessage));
-
-            throw exception;
-        }
-
-
-
-        public static void Update(PostComment comment, string text)
-        {
-            comment.Text = text.Trim();
-            comment.UpdatedAt = DateTime.UtcNow;
-        }
-
-        public static PostComment Update(string text)
-        {
-            return new PostComment
+            if (!validationResult.IsValid)
             {
-                Text = text.Trim()
-            };
+                var exception = new PostCommentNotValideException("Invalid post comment.");
+
+                exception.ValidationErrors.AddRange(
+                    validationResult.Errors.Select(e => e.ErrorMessage));
+
+                throw exception;
+            }
+            post.InitializeAudit();
+            return post;
+
+        }
+
+
+
+        public  void Update(string text)
+        {
+
+            if (string.IsNullOrWhiteSpace(text))
+                throw new ArgumentException("Text cannot be empty", nameof(text));
+
+            if (IsDeleted)
+                throw new InvalidOperationException("Cannot update a deleted comment");
+
+
+            Comment = text.Trim();
+            SetUpdatedAt();
+
         }
 
 

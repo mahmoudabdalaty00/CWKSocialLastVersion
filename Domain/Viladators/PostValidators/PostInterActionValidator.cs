@@ -7,8 +7,7 @@ namespace Domain.Viladators.PostValidators
     {
         public PostInterActionValidator()
         {
-            RuleFor(x => x.PostId)
-                .GreaterThan(0).WithMessage("Post ID must be greater than 0.");
+           
 
 
             RuleFor(x => x.ReactionType)

@@ -26,7 +26,7 @@ namespace API.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.PostInteraction.GetByPost)]
-        public async Task<IActionResult> GetInteractionsByPost(Guid postId)
+        public async Task<IActionResult> GetInteractionsByPost(int postId)
         {
             var query = new GetPostInteractionsByPostIdQuery { PostId = postId };
             var response = await _mediator.Send(query);
@@ -52,19 +52,19 @@ namespace API.Controllers.V1
 
         [HttpPatch(ApiRoutes.PostInteraction.Update + "/" + ApiRoutes.PostInteraction.IdRoute)]
         [ValidateModel]
-        public async Task<IActionResult> UpdatePostInteraction(string id, [FromBody] PostInteractionUpdate request)
+        public async Task<IActionResult> UpdatePostInteraction(int id, [FromBody] PostInteractionUpdate request)
         {
             var command = _mapper.Map<UpdatePostInteractionCommand>(request);
-            command.Id = Guid.Parse(id);
+            command.Id = id;
             var response = await _mediator.Send(command);
 
             return response.IsError ? HandlerErrorResponse(response.Errors) : Ok(response);
         }
 
         [HttpDelete(ApiRoutes.PostInteraction.Delete + "/" + ApiRoutes.PostInteraction.IdRoute)]
-        public async Task<IActionResult> DeletePostInteraction(string id)
+        public async Task<IActionResult> DeletePostInteraction(int id)
         {
-            var command = new DeletePostInteractionCommand { Id = Guid.Parse(id) };
+            var command = new DeletePostInteractionCommand { Id = id };
             var response = await _mediator.Send(command);
 
             if (response.IsError)

@@ -38,6 +38,7 @@ namespace Application.AutoMapper
             CreateMap<CreatePostInterActionDto, PostInterAction>()
                 .ConstructUsing((dto, context) => PostInterAction.Create(
                     dto.PostId,
+                    dto.UserProfileId,
                     dto.ReactionType))
                 .ForAllMembers(opts => opts.Ignore());
         }

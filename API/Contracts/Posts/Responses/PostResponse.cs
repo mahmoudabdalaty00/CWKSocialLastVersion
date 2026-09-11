@@ -2,7 +2,7 @@ namespace API.Contracts.Posts.Responses
 {
     public class PostResponse
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; } = string.Empty;
         public string? MediaUrl { get; set; }
         public string PostType { get; set; } = string.Empty;

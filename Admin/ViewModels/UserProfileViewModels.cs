@@ -16,7 +16,7 @@ public sealed class UserProfileDetailsViewModel
     public Guid Id { get; init; }
     public string IdentityUserId { get; init; } = string.Empty;
     public string FullName { get; init; } = string.Empty;
-    public DateTime DateOfBirth { get; init; }
+    public DateOnly DateOfBirth { get; init; }
     public string Bio { get; init; } = string.Empty;
     public string Phone { get; init; } = string.Empty;
     public string EmailAddress { get; init; } = string.Empty;
@@ -30,7 +30,7 @@ public sealed class UserProfileFormViewModel
     public string IdentityUserId { get; set; } = string.Empty;
     [Required, StringLength(50, MinimumLength = 3)] public string FirstName { get; set; } = string.Empty;
     [Required, StringLength(50, MinimumLength = 3)] public string LastName { get; set; } = string.Empty;
-    [Required, DataType(DataType.Date), Display(Name = "Date of birth")] public DateTime? DateOfBirth { get; set; }
+    [Required, DataType(DataType.Date), Display(Name = "Date of birth")] public DateOnly? DateOfBirth { get; set; }
     [StringLength(500)] public string Bio { get; set; } = string.Empty;
     [Phone] public string Phone { get; set; } = string.Empty;
     [Required, EmailAddress, StringLength(100), Display(Name = "Email address")] public string EmailAddress { get; set; } = string.Empty;

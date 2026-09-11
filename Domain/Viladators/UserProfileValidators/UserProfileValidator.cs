@@ -13,7 +13,7 @@ namespace Domain.Viladators.UserProfileValidators
 
                 RuleFor(x => x.BasicInfo)
                     .NotNull().WithMessage("Basic information is required.")
-                    .SetValidator(new BasicInfoValidate());
+                    .SetValidator(new BasicInfoValidator());
             }
         }
     }

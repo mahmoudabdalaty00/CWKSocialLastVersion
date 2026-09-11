@@ -26,9 +26,9 @@ namespace API.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.PostComment.GetByPost)]
-        public async Task<IActionResult> GetCommentsByPost(string postId)
+        public async Task<IActionResult> GetCommentsByPost(int postId)
         {
-            var query = new GetPostCommentsByPostIdQuery { PostId = Guid.Parse(postId) };
+            var query = new GetPostCommentsByPostIdQuery { PostId = postId };
             var response = await _mediator.Send(query);
 
             if (response.IsError)
@@ -52,19 +52,19 @@ namespace API.Controllers.V1
 
         [HttpPatch(ApiRoutes.PostComment.Update + "/" + ApiRoutes.PostComment.IdRoute)]
         [ValidateModel]
-        public async Task<IActionResult> UpdatePostComment(string id, [FromBody] PostCommentUpdate request)
+        public async Task<IActionResult> UpdatePostComment(int id, [FromBody] PostCommentUpdate request)
         {
             var command = _mapper.Map<UpdatePostCommentCommand>(request);
-            command.Id = Guid.Parse(id);
+            command.Id = id;
             var response = await _mediator.Send(command);
 
             return response.IsError ? HandlerErrorResponse(response.Errors) : Ok(response);
         }
 
         [HttpDelete(ApiRoutes.PostComment.Delete + "/" + ApiRoutes.PostComment.IdRoute)]
-        public async Task<IActionResult> DeletePostComment(string id)
+        public async Task<IActionResult> DeletePostComment(int id)
         {
-            var command = new DeletePostCommentCommand { Id = Guid.Parse(id) };
+            var command = new DeletePostCommentCommand { Id = id };
             var response = await _mediator.Send(command);
 
             if (response.IsError)

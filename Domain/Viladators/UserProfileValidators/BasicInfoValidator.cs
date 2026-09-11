@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Domain.Viladators.UserProfileValidators
 {
-    public class BasicInfoValidate : AbstractValidator<BasicInfo>
+    public class BasicInfoValidator : AbstractValidator<BasicInfo>
     {
-        public BasicInfoValidate()
+        public BasicInfoValidator()
         {
             RuleFor(x => x.FirstName)
               .NotEmpty().WithMessage("First name is required.")
@@ -17,8 +17,8 @@ namespace Domain.Viladators.UserProfileValidators
 
             RuleFor(x => x.DateOfBirth)
                   .NotEmpty().WithMessage("Date of birth is required.")
-                  .LessThan(DateTime.Today.AddYears(-10)).WithMessage("Person must be at least 10 years old.")
-                  .GreaterThan(DateTime.Today.AddYears(-120)).WithMessage("Please enter a valid date of birth.");
+                  .LessThan(DateOnly.FromDateTime(DateTime.Today).AddYears(-10)).WithMessage("Person must be at least 10 years old.")
+                  .GreaterThan(DateOnly.FromDateTime(DateTime.Today).AddYears(-120)).WithMessage("Please enter a valid date of birth.");
             RuleFor(x => x.Bio).MaximumLength(500).WithMessage("Bio must not exceed 500 characters.");
 
             RuleFor(x => x.Phone)

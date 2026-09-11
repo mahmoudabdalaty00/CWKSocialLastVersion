@@ -38,9 +38,9 @@ namespace API.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.Post.GetById)]
-        public async Task<IActionResult> GetPostById(string id)
+        public async Task<IActionResult> GetPostById(int id)
         {
-            var query = new GetPostByIdQuery { PostId = Guid.Parse(id) };
+            var query = new GetPostByIdQuery { PostId = id };
             var response = await _mediator.Send(query);
 
             if (response.IsError)
@@ -65,19 +65,19 @@ namespace API.Controllers.V1
 
         [HttpPatch(ApiRoutes.Post.Update + "/" + ApiRoutes.Post.IdRoute)]
         [ValidateModel]
-        public async Task<IActionResult> UpdatePost(string id, [FromBody] PostUpdate request)
+        public async Task<IActionResult> UpdatePost(int id, [FromBody] PostUpdate request)
         {
             var command = _mapper.Map<UpdatePostCommand>(request);
-            command.Id = Guid.Parse(id);
+            command.Id = id;
             var response = await _mediator.Send(command);
 
             return response.IsError ? HandlerErrorResponse(response.Errors) : Ok(response);
         }
 
         [HttpDelete(ApiRoutes.Post.Delete + "/" + ApiRoutes.Post.IdRoute)]
-        public async Task<IActionResult> DeletePost(string id)
+        public async Task<IActionResult> DeletePost(int id)
         {
-            var command = new DeletePostCommand { Id = Guid.Parse(id) };
+            var command = new DeletePostCommand { Id = id };
             var response = await _mediator.Send(command);
 
             if (response.IsError)

@@ -33,7 +33,7 @@ public class PostRepository : GenericRepository<Post>, IPostRepository
     {
         return await _context.Posts
             .Include(p => p.PostComments)
-            .Include(p => p.PostInterAction)
+            .Include(p => p.PostInterActions)
             .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
     }
 }

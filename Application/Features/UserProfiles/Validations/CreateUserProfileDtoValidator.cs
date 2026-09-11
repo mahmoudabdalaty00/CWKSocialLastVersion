@@ -40,7 +40,7 @@ namespace Application.Features.UserProfiles.Validations
 
             RuleFor(x => x.DateOfBirth)
                 .NotEmpty().WithMessage("Date of birth is required.")
-                .LessThan(DateTime.UtcNow).WithMessage("Date of birth must be in the past.");
+                .LessThan(DateOnly.FromDateTime(DateTime.UtcNow)).WithMessage("Date of birth must be in the past.");
         }
 
         private async Task<bool> BeUniqueEmail(string email, CancellationToken cancellationToken)

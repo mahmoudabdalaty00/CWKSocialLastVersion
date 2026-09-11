@@ -43,6 +43,15 @@ namespace Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("MediaUrl")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PostType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PrivacySetting")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -64,6 +73,10 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -76,10 +89,6 @@ namespace Data.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -89,6 +98,8 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("PostComments");
                 });
@@ -119,9 +130,14 @@ namespace Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("UserProfileId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("PostInterActions");
                 });
@@ -350,7 +366,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Domain.Models.Posts.Post", b =>
                 {
                     b.HasOne("Domain.Models.UserProfiles.UserProfile", "UserProfile")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("UserProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -360,20 +376,40 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Posts.PostComment", b =>
                 {
-                    b.HasOne("Domain.Models.Posts.Post", null)
+                    b.HasOne("Domain.Models.Posts.Post", "Post")
                         .WithMany("PostComments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "UserProfile")
+                        .WithMany("PostComments")
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("UserProfile");
                 });
 
             modelBuilder.Entity("Domain.Models.Posts.PostInterAction", b =>
                 {
-                    b.HasOne("Domain.Models.Posts.Post", null)
-                        .WithMany("PostInterAction")
+                    b.HasOne("Domain.Models.Posts.Post", "Post")
+                        .WithMany("PostInterActions")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "UserProfile")
+                        .WithMany("PostInterActions")
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("UserProfile");
                 });
 
             modelBuilder.Entity("Domain.Models.UserProfiles.UserProfile", b =>
@@ -391,8 +427,8 @@ namespace Data.Migrations
                                 .IsRequired()
                                 .HasColumnType("text");
 
-                            b1.Property<DateTime>("DateOfBirth")
-                                .HasColumnType("timestamp with time zone");
+                            b1.Property<DateOnly>("DateOfBirth")
+                                .HasColumnType("date");
 
                             b1.Property<string>("EmailAddress")
                                 .IsRequired()
@@ -477,7 +513,16 @@ namespace Data.Migrations
                 {
                     b.Navigation("PostComments");
 
-                    b.Navigation("PostInterAction");
+                    b.Navigation("PostInterActions");
+                });
+
+            modelBuilder.Entity("Domain.Models.UserProfiles.UserProfile", b =>
+                {
+                    b.Navigation("PostComments");
+
+                    b.Navigation("PostInterActions");
+
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

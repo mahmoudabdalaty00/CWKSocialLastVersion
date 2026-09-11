@@ -6,7 +6,7 @@ namespace Application.Features.PostsFeatures.Posts.Queries
 {
   public class GetPostByIdQuery : IRequest<OperationResult<PostResponseDto>>
   {
-      public Guid PostId { get; set; }
+      public int PostId { get; set; }
   }  
 }
 

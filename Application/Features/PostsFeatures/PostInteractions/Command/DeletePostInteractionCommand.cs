@@ -6,6 +6,6 @@ namespace Application.Features.PostsFeatures.PostInteractions.Command
 {
     public class DeletePostInteractionCommand : IRequest<OperationResult<PostInterActionResponseDto>>
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
     }
 }

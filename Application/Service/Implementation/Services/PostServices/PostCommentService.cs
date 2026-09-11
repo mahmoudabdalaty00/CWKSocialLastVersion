@@ -54,7 +54,7 @@ public class PostCommentService : IPostCommentService
         if (comment == null)
             throw new KeyNotFoundException($"PostComment with ID {id} not found.");
 
-        PostComment.Update(comment, dto.Text);
+        comment.Update(dto.Text);
 
         _unitOfWork.PostCommentRepository.Update(comment);
         await _unitOfWork.SaveChangesAsync();

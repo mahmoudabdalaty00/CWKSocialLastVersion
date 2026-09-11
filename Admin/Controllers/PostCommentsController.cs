@@ -9,8 +9,9 @@ public class PostCommentsController(IPostCommentService postCommentService) : Co
 {
     public async Task<IActionResult> Index(int postId)
     {
-        ViewBag.PostId = postId;
-        return View((await postCommentService.GetAllActiveByPostIdAsync(postId)).Select(ToListItem));
+        var postID =postId;
+        ViewBag.PostId = postID;
+        return View((await postCommentService.GetAllActiveByPostIdAsync(postID)).Select(ToListItem));
     }
     public async Task<IActionResult> Details(int id) => await WithComment(id, comment => View(ToListItem(comment)));
     public IActionResult Create(int postId) => View(new PostCommentFormViewModel { PostId = postId });
@@ -28,7 +29,11 @@ public class PostCommentsController(IPostCommentService postCommentService) : Co
     public async Task<IActionResult> Edit(int id, PostCommentFormViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
-        try { await postCommentService.UpdateAsync(id, new UpdatePostCommentDto { Text = model.Text }); return RedirectToAction(nameof(Details), new { id }); }
+        try {
+            await postCommentService
+                .UpdateAsync(id, new UpdatePostCommentDto { Text = model.Text });
+            return RedirectToAction(nameof(Details), new { id });
+        }
         catch (KeyNotFoundException) { return NotFound(); }
     }
 

@@ -7,7 +7,7 @@ namespace Application.Features.PostsFeatures.PostInteractions.Command
 {
     public class CreatePostInteractionCommand : IRequest<OperationResult<PostInterActionResponseDto>>
     {
-        public Guid PostId { get; set; }
+        public int PostId { get; set; }
         public ReactionType ReactionType { get; set; }
     }
 }

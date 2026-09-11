@@ -6,6 +6,6 @@ namespace Application.Features.PostsFeatures.Posts.Commands
 {
     public class DeletePostCommand : IRequest<OperationResult<PostResponseDto>>
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
     }
 }

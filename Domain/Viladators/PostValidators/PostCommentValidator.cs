@@ -10,14 +10,13 @@ namespace Domain.Viladators.PostValidators
 
         public PostCommentValidator()
         {
-            RuleFor(x => x.Text)
+            RuleFor(x => x.Comment)
                 .NotEmpty().WithMessage("Comment text should not be empty.")
                  .NotNull().WithMessage("Comment text should not be null.")
                 .Length(MinTextLength, MaxTextLength)
                 .WithMessage($"Comment text must be between {MinTextLength} and {MaxTextLength} characters.");
 
-            RuleFor(x => x.PostId)
-                .GreaterThan(0).WithMessage("Post ID must be greater than 0.");
+          
 
             RuleFor(x => x.UserProfileId)
                 .NotEqual(Guid.Empty).WithMessage("User profile ID cannot be empty.");

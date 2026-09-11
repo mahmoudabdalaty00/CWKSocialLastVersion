@@ -54,7 +54,7 @@ public class PostService : IPostService
         if (post == null)
             throw new KeyNotFoundException($"Post with ID {id} not found.");
 
-        Post.Update(post, dto.Content, dto.MediaUrl, dto.PostType, dto.PrivacySetting);
+        post.Update(dto.Content, dto.MediaUrl, dto.PostType, dto.PrivacySetting);
 
         _unitOfWork.PostRepository.Update(post);
         await _unitOfWork.SaveChangesAsync();

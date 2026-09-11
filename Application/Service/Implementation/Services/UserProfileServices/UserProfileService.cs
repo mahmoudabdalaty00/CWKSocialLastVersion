@@ -150,7 +150,6 @@ public class UserProfileService : IUserProfileService
 
             var basicInfo = BasicInfo.Create(dto.FirstName, dto.LastName, dto.DateOfBirth, dto.Bio, dto.Phone, dto.EmailAddress, dto.CurrentCity);
             userProfile.UpdateBasicInfo(basicInfo);
-            userProfile.UpdatedAt = DateTime.UtcNow;
 
             _unitOfWork.UserProfileRepository.Update(userProfile);
             await _unitOfWork.SaveChangesAsync();
@@ -188,8 +187,8 @@ public class UserProfileService : IUserProfileService
             return result;
         }
 
-        userProfile.IsDeleted = true;
-        userProfile.DeletedAt = DateTime.UtcNow;
+    
+        userProfile.Delete();
 
         _unitOfWork.UserProfileRepository.Update(userProfile);
         await _unitOfWork.SaveChangesAsync();
