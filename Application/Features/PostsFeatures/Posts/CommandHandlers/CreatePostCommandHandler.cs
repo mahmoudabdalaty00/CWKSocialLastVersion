@@ -2,6 +2,7 @@ using Application.Features.PostsFeatures.Posts.Commands;
 using Application.Models;
 using Application.Service.DTOs.PostDto;
 using Application.Service.Interface.Services.PostServices;
+using AutoMapper;
 using Domain.Exceptions;
 using Domain.Models.Conasts;
 using MediatR;
@@ -15,10 +16,12 @@ namespace Application.Features.PostsFeatures.Posts.CommandHandlers
     public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, OperationResult<PostResponseDto>>
     {
         private readonly IPostService _postService;
-
-        public CreatePostCommandHandler(IPostService postService)
+        private readonly IMapper _mapper;   
+        public CreatePostCommandHandler(IPostService postService, IMapper mapper)
         {
             _postService = postService;
+            _mapper = mapper;
+
         }
 
         public async Task<OperationResult<PostResponseDto>> Handle(CreatePostCommand request, CancellationToken cancellationToken)
@@ -27,16 +30,8 @@ namespace Application.Features.PostsFeatures.Posts.CommandHandlers
 
             try
             {
-                var dto = new CreatePostDto
-                {
-                    Content = request.Content,
-                    MediaUrl = request.MediaUrl,
-                    PostType = request.PostType,
-                    PrivacySetting = request.PrivacySetting,
-                    UserProfileId = request.UserProfileId
-                };
-
-                result.Result = await _postService.CreateAsync(dto);
+               var dto = _mapper.Map<CreatePostDto>(request);
+                result = await _postService.CreateAsync(dto);
             }
             catch (DomainValidationException ex)
             {

@@ -36,7 +36,7 @@ namespace Application.Features.PostsFeatures.Posts.CommandHandlers
                     PrivacySetting = request.PrivacySetting
                 };
 
-                result.Result = await _postService.UpdateAsync(request.Id, dto);
+                result = await _postService.UpdateAsync(request.Id, dto);
             }
             catch (KeyNotFoundException ex)
             {

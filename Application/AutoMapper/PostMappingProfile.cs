@@ -1,8 +1,9 @@
+using Application.Features.PostsFeatures.Posts.Commands;
+using Application.Service.DTOs.PostCommentDto;
+using Application.Service.DTOs.PostDto;
+using Application.Service.DTOs.PostInterActionDto;
 using AutoMapper;
 using Domain.Models.Posts;
-using Application.Service.DTOs.PostDto;
-using Application.Service.DTOs.PostCommentDto;
-using Application.Service.DTOs.PostInterActionDto;
 
 namespace Application.AutoMapper
 {
@@ -12,6 +13,7 @@ namespace Application.AutoMapper
         {
             // Post Mappings
             CreateMap<Post, PostResponseDto>();
+            CreateMap<CreatePostCommand, CreatePostDto>();
 
             CreateMap<CreatePostDto, Post>()
                 .ConstructUsing((dto, context) => Post.Create(
@@ -21,6 +23,14 @@ namespace Application.AutoMapper
                     dto.PrivacySetting,
                     dto.UserProfileId))
                 .ForAllMembers(opts => opts.Ignore());
+
+
+
+
+
+
+
+
 
             // PostComment Mappings
             CreateMap<PostComment, PostCommentResponseDto>();

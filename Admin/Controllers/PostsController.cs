@@ -15,8 +15,16 @@ public class PostsController(IPostService postService) : Controller
     public async Task<IActionResult> Create(PostFormViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
-        try { var post = await postService.CreateAsync(ToCreateDto(model)); return RedirectToAction(nameof(Details), new { id = post.Id }); }
-        catch (Exception exception) { ModelState.AddModelError(string.Empty, exception.Message); return View(model); }
+        try 
+        {
+            var post = await postService.CreateAsync(ToCreateDto(model));
+            return RedirectToAction(nameof(Details), new { id = post.Result.Id }); 
+        }
+        catch (Exception exception)
+        {
+            ModelState.AddModelError(string.Empty, exception.Message); 
+            return View(model); 
+        }
     }
 
     public async Task<IActionResult> Edit(int id) => await WithPost(id, post => View(ToForm(post)));
