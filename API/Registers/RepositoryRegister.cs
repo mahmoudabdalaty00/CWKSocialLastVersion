@@ -1,9 +1,11 @@
+using Application.Service.DTOs.PostDto;
 using Application.Service.Implementation.Common;
 using Application.Service.Implementation.Services.PostServices;
 using Application.Service.Implementation.Services.UserProfileServices;
 using Application.Service.Interface.Common;
 using Application.Service.Interface.Services.PostServices;
 using Application.Service.Interface.Services.UserProfileServices;
+using FluentValidation;
 
 namespace API.Registers;
 
@@ -16,5 +18,19 @@ public class RepositoryRegister : IWebApplicationBuilderRegister
         builder.Services.AddScoped<IPostService, PostService>();
         builder.Services.AddScoped<IPostInterActionService, PostInterActionService>();
         builder.Services.AddScoped<IPostCommentService, PostCommentService>();
+
+
+
+
+
+
+
+
+
+
+
+        // Add FluentValidation - THIS IS THE MISSING PIECE
+        builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
     }
 }

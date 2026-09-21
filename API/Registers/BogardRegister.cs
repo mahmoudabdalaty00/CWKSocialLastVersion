@@ -1,4 +1,5 @@
 using Application.Features.UserProfiles.Queries;
+using FluentValidation;
 
 namespace API.Registers
 {
@@ -12,6 +13,9 @@ namespace API.Registers
             {
                 cfg.RegisterServicesFromAssembly(typeof(GetAllUserProfilesQuery).Assembly);
             });
+
+
+
         }
     }
 }
