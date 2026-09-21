@@ -26,13 +26,13 @@ public class PostCommentService : IPostCommentService
         return _mapper.Map<PostCommentResponseDto>(comment);
     }
 
-    public async Task<IReadOnlyList<PostCommentResponseDto>> GetByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostCommentResponseDto>> GetByPostIdAsync(string postId)
     {
         var comments = await _unitOfWork.PostCommentRepository.GetByPostIdAsync(postId);
         return _mapper.Map<IReadOnlyList<PostCommentResponseDto>>(comments);
     }
 
-    public async Task<IReadOnlyList<PostCommentResponseDto>> GetAllActiveByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostCommentResponseDto>> GetAllActiveByPostIdAsync(string postId)
     {
         var comments = await _unitOfWork.PostCommentRepository.GetAllActiveByPostIdAsync(postId);
         return _mapper.Map<IReadOnlyList<PostCommentResponseDto>>(comments);
@@ -54,7 +54,7 @@ public class PostCommentService : IPostCommentService
         if (comment == null)
             throw new KeyNotFoundException($"PostComment with ID {id} not found.");
 
-        comment.Update(dto.Text);
+        comment.Update(dto.Text,dto.UpdatedById);
 
         _unitOfWork.PostCommentRepository.Update(comment);
         await _unitOfWork.SaveChangesAsync();

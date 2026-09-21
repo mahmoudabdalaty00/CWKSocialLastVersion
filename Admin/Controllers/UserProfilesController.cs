@@ -14,7 +14,7 @@ public class UserProfilesController(IUserProfileService userProfileService) : Co
         return View(result.Result!.Select(profile => new UserProfileListItemViewModel { Id = profile.Id, FullName = $"{profile.FirstName} {profile.LastName}", EmailAddress = profile.EmailAddress, CurrentCity = profile.CurrentCity, CreatedAt = profile.CreatedAt }));
     }
 
-    public async Task<IActionResult> Details(Guid id)
+    public async Task<IActionResult> Details(string id)
     {
         var result = await userProfileService.GetByIdAsync(id);
         return result.IsError ? NotFound() : View(ToDetails(result.Result!));
@@ -31,14 +31,14 @@ public class UserProfilesController(IUserProfileService userProfileService) : Co
         return RedirectToAction(nameof(Details), new { id = result.Result!.Id });
     }
 
-    public async Task<IActionResult> Edit(Guid id)
+    public async Task<IActionResult> Edit(string id)
     {
         var result = await userProfileService.GetByIdAsync(id);
         return result.IsError ? NotFound() : View(ToForm(result.Result!));
     }
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(Guid id, UserProfileFormViewModel model)
+    public async Task<IActionResult> Edit(string id, UserProfileFormViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
         var result = await userProfileService.UpdateAsync(id, ToUpdateDto(model));
@@ -46,14 +46,14 @@ public class UserProfilesController(IUserProfileService userProfileService) : Co
         return RedirectToAction(nameof(Details), new { id });
     }
 
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(string id)
     {
         var result = await userProfileService.GetByIdAsync(id);
         return result.IsError ? NotFound() : View(ToDetails(result.Result!));
     }
 
     [HttpPost, ActionName(nameof(Delete)), ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(Guid id)
+    public async Task<IActionResult> DeleteConfirmed(string id)
     {
         var result = await userProfileService.DeleteAsync(id);
         return result.IsError ? NotFound() : RedirectToAction(nameof(Index));

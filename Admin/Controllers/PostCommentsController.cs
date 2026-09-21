@@ -7,24 +7,28 @@ namespace Admin.Controllers;
 
 public class PostCommentsController(IPostCommentService postCommentService) : Controller
 {
-    public async Task<IActionResult> Index(int postId)
+    public async Task<IActionResult> Index(string postId)
     {
         var postID =postId;
         ViewBag.PostId = postID;
         return View((await postCommentService.GetAllActiveByPostIdAsync(postID)).Select(ToListItem));
     }
-    public async Task<IActionResult> Details(int id) => await WithComment(id, comment => View(ToListItem(comment)));
-    public IActionResult Create(int postId) => View(new PostCommentFormViewModel { PostId = postId });
+    public async Task<IActionResult> Details(int id) 
+        => await WithComment(id, comment => View(ToListItem(comment)));
+    public IActionResult Create(string postId) => View(new PostCommentFormViewModel { PostId = postId });
 
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(PostCommentFormViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
-        try { var comment = await postCommentService.CreateAsync(new CreatePostCommentDto { PostId = model.PostId!.Value, Text = model.Text, UserProfileId = model.UserProfileId!.Value }); return RedirectToAction(nameof(Details), new { id = comment.Id }); }
+        try { var comment = await postCommentService.CreateAsync(new CreatePostCommentDto { PostId = model.PostId, Text = model.Text, CreatedById = model.CreatedById }); return RedirectToAction(nameof(Details), new { id = comment.Id }); }
         catch (Exception exception) { ModelState.AddModelError(string.Empty, exception.Message); return View(model); }
     }
 
-    public async Task<IActionResult> Edit(int id) => await WithComment(id, comment => View(new PostCommentFormViewModel { PostId = comment.PostId, Text = comment.Text, UserProfileId = comment.UserProfileId }));
+    public async Task<IActionResult> Edit(int id) 
+        => await WithComment(id, comment => View(new PostCommentFormViewModel { PostId = comment.PostId, Text = comment.Text, CreatedById = comment.CreatedById, UpdatedById = comment.UpdatedById }));
+  
+    
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, PostCommentFormViewModel model)
     {
@@ -37,7 +41,10 @@ public class PostCommentsController(IPostCommentService postCommentService) : Co
         catch (KeyNotFoundException) { return NotFound(); }
     }
 
-    public async Task<IActionResult> Delete(int id) => await WithComment(id, comment => View(ToListItem(comment)));
+    public async Task<IActionResult> Delete(int id)
+        => await WithComment(id, comment => View(ToListItem(comment)));
+  
+    
     [HttpPost, ActionName(nameof(Delete)), ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
@@ -50,5 +57,6 @@ public class PostCommentsController(IPostCommentService postCommentService) : Co
         try { return success(await postCommentService.GetByIdAsync(id)); }
         catch (KeyNotFoundException) { return NotFound(); }
     }
-    private static PostCommentListItemViewModel ToListItem(PostCommentResponseDto item) => new() { Id = item.Id, PostId = item.PostId, Text = item.Text, UserProfileId = item.UserProfileId, CreatedAt = item.CreatedAt };
+    private static PostCommentListItemViewModel ToListItem(PostCommentResponseDto item)
+        => new() { Id = item.Id, PostId = item.PostId, Text = item.Text, CreatedById = item.CreatedById, UpdatedById = item.UpdatedById, CreatedAt = item.CreatedAt };
 }

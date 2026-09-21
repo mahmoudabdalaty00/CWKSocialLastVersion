@@ -7,19 +7,20 @@ namespace Admin.Controllers;
 
 public class PostInteractionsController(IPostInterActionService postInteractionService) : Controller
 {
-    public async Task<IActionResult> Index(int postId)
+    public async Task<IActionResult> Index(string postId)
     {
         ViewBag.PostId = postId;
         return View((await postInteractionService.GetAllActiveByPostIdAsync(postId)).Select(ToListItem));
     }
     public async Task<IActionResult> Details(int id) => await WithInteraction(id, interaction => View(ToListItem(interaction)));
-    public IActionResult Create(int postId) => View(new PostInteractionFormViewModel { PostId = postId });
+    public IActionResult Create(string postId) => View(new PostInteractionFormViewModel { PostId = postId });
 
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(PostInteractionFormViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
-        try { var interaction = await postInteractionService.CreateAsync(new CreatePostInterActionDto { PostId = model.PostId!.Value, ReactionType = model.ReactionType!.Value }); return RedirectToAction(nameof(Details), new { id = interaction.Id }); }
+        try { var interaction = await postInteractionService.CreateAsync(new CreatePostInterActionDto { PostId = model.PostId, ReactionType = model.ReactionType!.Value });
+            return RedirectToAction(nameof(Details), new { id = interaction.Id }); }
         catch (Exception exception) { ModelState.AddModelError(string.Empty, exception.Message); return View(model); }
     }
 

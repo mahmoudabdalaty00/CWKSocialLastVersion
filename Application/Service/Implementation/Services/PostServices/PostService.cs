@@ -28,7 +28,7 @@ public class PostService : IPostService
         _updateValidator = updateValidator ?? throw new ArgumentNullException(nameof(updateValidator));
     }
 
-    public async Task<PostResponseDto> GetByIdAsync(int id)
+    public async Task<PostResponseDto> GetByIdAsync(string id)
     {
         var post = await _unitOfWork.PostRepository.GetByIdAsync(id);
         if (post == null)
@@ -37,7 +37,7 @@ public class PostService : IPostService
         return _mapper.Map<PostResponseDto>(post);
     }
 
-    public async Task<IReadOnlyList<PostResponseDto>> GetByUserIdAsync(Guid userProfileId)
+    public async Task<IReadOnlyList<PostResponseDto>> GetByUserIdAsync(string userProfileId)
     {
         var posts = await _unitOfWork.PostRepository.GetByUserIdAsync(userProfileId);
         return _mapper.Map<IReadOnlyList<PostResponseDto>>(posts);
@@ -76,10 +76,10 @@ public class PostService : IPostService
             }
 
             // Verify user exists
-            var userProfile = await _unitOfWork.UserProfileRepository.GetByIdAsync(dto.UserProfileId);
+            var userProfile = await _unitOfWork.UserProfileRepository.GetByIdAsync(dto.CreatedById);
             if (userProfile == null)
             {
-                result.AddError(ErrorCodes.NotFound, $"User profile with ID {dto.UserProfileId} not found.");
+                result.AddError(ErrorCodes.NotFound, $"User profile with ID {dto.CreatedById} not found.");
                 return result;
             }
 
@@ -116,14 +116,14 @@ public class PostService : IPostService
     /// <summary>
     /// Updates an existing post with validation and error handling.
     /// </summary>
-    public async Task<OperationResult<PostResponseDto>> UpdateAsync(int id, UpdatePostDto dto)
+    public async Task<OperationResult<PostResponseDto>> UpdateAsync(string id, UpdatePostDto dto)
     {
         var result = new OperationResult<PostResponseDto>();
 
         try
         {
             // Input validation
-            if (id <= 0)
+            if (string.IsNullOrEmpty(id))
             {
                 result.AddError(ErrorCodes.ValidationError, "Post ID must be greater than zero.");
                 return result;
@@ -153,8 +153,7 @@ public class PostService : IPostService
             }
 
             // Update post
-            post.Update(dto.Content, dto.MediaUrl, dto.PostType, dto.PrivacySetting);
-
+            post.Update(dto.Content, dto.MediaUrl, dto.PostType, dto.PrivacySetting, dto.UpdatedById);
             _unitOfWork.PostRepository.Update(post);
             await _unitOfWork.SaveChangesAsync();
 
@@ -184,13 +183,13 @@ public class PostService : IPostService
     /// <summary>
     /// Soft deletes a post.
     /// </summary>
-    public async Task<OperationResult<PostResponseDto>> DeleteAsync(int id)
+    public async Task<OperationResult<PostResponseDto>> DeleteAsync(string id)
     {
         var result = new OperationResult<PostResponseDto>();
 
         try
         {
-            if (id <= 0)
+            if (string.IsNullOrEmpty(id))
             {
                 result.AddError(ErrorCodes.ValidationError, "Post ID must be greater than zero.");
                 return result;
@@ -228,13 +227,13 @@ public class PostService : IPostService
     /// <summary>
     /// Restores a soft-deleted post.
     /// </summary>
-    public async Task<OperationResult<PostResponseDto>> RestoreAsync(int id)
+    public async Task<OperationResult<PostResponseDto>> RestoreAsync(string id)
     {
         var result = new OperationResult<PostResponseDto>();
 
         try
         {
-            if (id <= 0)
+            if (string.IsNullOrEmpty(id))
             {
                 result.AddError(ErrorCodes.ValidationError, "Post ID must be greater than zero.");
                 return result;

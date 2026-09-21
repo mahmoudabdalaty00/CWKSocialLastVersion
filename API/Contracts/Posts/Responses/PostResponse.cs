@@ -1,3 +1,5 @@
+using Domain.Models.Conasts;
+
 namespace API.Contracts.Posts.Responses
 {
     public class PostResponse
@@ -5,8 +7,8 @@ namespace API.Contracts.Posts.Responses
         public int Id { get; set; }
         public string Content { get; set; } = string.Empty;
         public string? MediaUrl { get; set; }
-        public string PostType { get; set; } = string.Empty;
-        public string PrivacySetting { get; set; } = string.Empty;
+        public PostType PostType { get; set; }   
+        public PrivacySetting PrivacySetting { get; set; } 
         public Guid UserProfileId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

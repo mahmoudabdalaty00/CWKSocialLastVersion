@@ -6,8 +6,8 @@ namespace Application.Features.PostsFeatures.PostComments.Command
 {
     public class CreatePostCommentCommand : IRequest<OperationResult<PostCommentResponseDto>>
     {
-        public int PostId { get; set; }
+        public string PostId { get; set; }
         public string Text { get; set; } = string.Empty;
-        public Guid UserProfileId { get; set; }
+        public string CreatedById { get; set; }
     }
 }

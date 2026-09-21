@@ -26,7 +26,7 @@ namespace API.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.PostComment.GetByPost)]
-        public async Task<IActionResult> GetCommentsByPost(int postId)
+        public async Task<IActionResult> GetCommentsByPost(string postId)
         {
             var query = new GetPostCommentsByPostIdQuery { PostId = postId };
             var response = await _mediator.Send(query);

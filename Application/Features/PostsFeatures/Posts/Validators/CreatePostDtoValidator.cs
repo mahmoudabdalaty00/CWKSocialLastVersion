@@ -23,7 +23,7 @@ namespace Application.Features.PostsFeatures.Posts.Validators
                       .MinimumLength(3).WithMessage("Content must be at least 3 characters.")
                       .MaximumLength(500).WithMessage("Content must be at most 500 characters.");
 
-            RuleFor(x => x.UserProfileId)
+            RuleFor(x => x.CreatedById)
                 .NotEmpty().WithMessage("UserProfileId is required.")
                 .MustAsync(BeExistingUserProfile).WithMessage("The specified UserProfileId does not exist.");
 
@@ -33,7 +33,8 @@ namespace Application.Features.PostsFeatures.Posts.Validators
 
             // MediaUrl is required only for non-Text post types
             RuleFor(x => x.MediaUrl)
-                .NotEmpty().WithMessage("MediaUrl is required for this post type.")
+                .NotEmpty()
+                .WithMessage("MediaUrl is required for this post type.")
                 .When(x => x.PostType != PostType.Text);
 
             RuleFor(x => x.PrivacySetting)
@@ -44,7 +45,7 @@ namespace Application.Features.PostsFeatures.Posts.Validators
  
 
 
-        private async Task<bool> BeExistingUserProfile(Guid userProfileId, CancellationToken cancellationToken)
+        private async Task<bool> BeExistingUserProfile(string userProfileId, CancellationToken cancellationToken)
         {
             // Check if the UserProfileId exists in the database
             bool exists = await _context.UserProfiles

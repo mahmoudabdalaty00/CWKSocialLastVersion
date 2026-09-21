@@ -31,7 +31,7 @@ namespace Application.Features.PostsFeatures.PostComments.CommandHandler
                 {
                     PostId = request.PostId,
                     Text = request.Text,
-                    UserProfileId = request.UserProfileId
+                    CreatedById = request.CreatedById
                 };
 
                 result.Result = await _postCommentService.CreateAsync(dto);
@@ -39,12 +39,12 @@ namespace Application.Features.PostsFeatures.PostComments.CommandHandler
             catch (DomainValidationException ex)
             {
                 result.IsError = true;
-                result.Errors.AddRange(ex.ValidationErrors.Select(error => new Error { Code = ErrorCodes.ValidationError, Message = error }));
+                result.AddErrors(ex.ValidationErrors.Select(error => new Error { Code = ErrorCodes.ValidationError, Message = error }));
             }
             catch (Exception ex)
             {
                 result.IsError = true;
-                result.Errors.Add(new Error { Code = ErrorCodes.ServerError, Message = ex.Message });
+                result.AddError(ErrorCodes.ServerError, ex.Message );
             }
 
             return result;

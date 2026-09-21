@@ -6,6 +6,6 @@ namespace Application.Features.PostsFeatures.PostComments.Queries
 {
     public class GetPostCommentsByPostIdQuery : IRequest<OperationResult<IEnumerable<PostCommentResponseDto>>>
     {
-        public int PostId { get; set; }
+        public string PostId { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace Application.Features.UserProfiles.Commands
 {
     public class DeleteUserProfileCommand : IRequest<OperationResult<UserProfileResponseDto>>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }

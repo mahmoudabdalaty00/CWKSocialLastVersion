@@ -8,5 +8,8 @@ public class CreatePostDto
     public string MediaUrl { get; set; } = string.Empty;
     public PostType PostType { get; set; } = PostType.Text;
     public PrivacySetting PrivacySetting { get; set; } = PrivacySetting.Public;
-    public Guid UserProfileId { get; set; }
+    public string? CreatedById { get; set; }
+    public string? UpdatedById { get; set; }
+    public string? DeletedById { get; set; }
+
 }

@@ -16,8 +16,8 @@ namespace Domain.Viladators.PostValidators
                 .Length(MinContentLength, MaxContentLength)
                 .WithMessage($"Post content must be between {MinContentLength} and {MaxContentLength} characters.");
 
-            RuleFor(x => x.UserProfileId)
-                .NotEqual(Guid.Empty).WithMessage("User profile ID cannot be empty.");
+            RuleFor(x => x.CreatedById)
+                .NotEqual(string.Empty).WithMessage("User profile ID cannot be empty.");
 
 
 

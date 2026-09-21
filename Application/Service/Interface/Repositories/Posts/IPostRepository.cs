@@ -5,8 +5,8 @@ namespace Application.Service.Interface.Repositories.Posts
 {
     public interface IPostRepository : IGenericRepository<Post>
     {
-        Task<IReadOnlyList<Post>> GetByUserIdAsync(Guid userProfileId);
+        Task<IReadOnlyList<Post>> GetByUserIdAsync(string userProfileId);
         Task<IReadOnlyList<Post>> GetAllActiveAsync();
-        Task<Post?> GetByIdWithDetailsAsync(int id);
+        Task<Post?> GetByIdWithDetailsAsync(string id);
     }
 }

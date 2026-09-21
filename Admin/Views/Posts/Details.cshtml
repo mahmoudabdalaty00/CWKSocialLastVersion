@@ -16,7 +16,7 @@
     <p class="mb-3 text-break">@Model.Content</p>
     <dl class="admin-details">
         <dt>Author</dt>
-        <dd><code>@Model.UserProfileId</code></dd>
+        <dd><code>@Model.CreatedById</code></dd>
         <dt>Updated</dt>
         <dd>@Model.UpdatedAt?.ToLocalTime().ToString("g")</dd>
     </dl>

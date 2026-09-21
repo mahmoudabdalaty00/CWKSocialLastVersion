@@ -5,6 +5,10 @@ namespace Admin.ViewModels;
 
 public sealed class PostInteractionFormViewModel
 {
-    [Required] public int? PostId { get; set; }
-    [Required, Display(Name = "Reaction")] public ReactionType? ReactionType { get; set; }
+    [Required] 
+    public string? PostId { get; set; }
+
+
+    [Required, Display(Name = "Reaction")] 
+    public ReactionType? ReactionType { get; set; }
 }

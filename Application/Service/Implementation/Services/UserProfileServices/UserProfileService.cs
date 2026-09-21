@@ -34,7 +34,7 @@ public class UserProfileService : IUserProfileService
         _updateValidator = updateValidator;
     }
 
-    public async Task<OperationResult<UserProfileResponseDto>> GetByIdAsync(Guid id)
+    public async Task<OperationResult<UserProfileResponseDto>> GetByIdAsync(string id)
     {
         var result = new OperationResult<UserProfileResponseDto>();
         var userProfile = await _unitOfWork.UserProfileRepository.GetByIdAsync(id);
@@ -116,7 +116,7 @@ public class UserProfileService : IUserProfileService
         return result;
     }
 
-    public async Task<OperationResult<UserProfileResponseDto>> UpdateAsync(Guid id, UpdateUserProfileDto dto)
+    public async Task<OperationResult<UserProfileResponseDto>> UpdateAsync(string id, UpdateUserProfileDto dto)
     {
         var result = new OperationResult<UserProfileResponseDto>();
 
@@ -175,7 +175,7 @@ public class UserProfileService : IUserProfileService
         return result;
     }
 
-    public async Task<OperationResult<UserProfileResponseDto>> DeleteAsync(Guid id)
+    public async Task<OperationResult<UserProfileResponseDto>> DeleteAsync(string id)
     {
         var result = new OperationResult<UserProfileResponseDto>();
         var userProfile = await _unitOfWork.UserProfileRepository.GetByIdAsync(id);
@@ -197,7 +197,7 @@ public class UserProfileService : IUserProfileService
         return result;
     }
 
-    public async Task<OperationResult<UserProfileResponseDto>> RestoreAsync(Guid id)
+    public async Task<OperationResult<UserProfileResponseDto>> RestoreAsync(string id)
     {
         var result = new OperationResult<UserProfileResponseDto>();
         var userProfile = await _unitOfWork.UserProfileRepository.GetByIdAsync(id);

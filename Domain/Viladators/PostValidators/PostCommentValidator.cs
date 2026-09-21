@@ -18,8 +18,8 @@ namespace Domain.Viladators.PostValidators
 
           
 
-            RuleFor(x => x.UserProfileId)
-                .NotEqual(Guid.Empty).WithMessage("User profile ID cannot be empty.");
+            RuleFor(x => x.CreatedById)
+                .NotEqual(string.Empty).WithMessage("User profile ID cannot be empty.");
 
             RuleFor(x => x.CreatedAt)
                 .NotEmpty().WithMessage("Created date is required.")

@@ -21,14 +21,8 @@ namespace Application.AutoMapper
                     dto.MediaUrl,
                     dto.PostType,
                     dto.PrivacySetting,
-                    dto.UserProfileId))
+                    dto.CreatedById))
                 .ForAllMembers(opts => opts.Ignore());
-
-
-
-
-
-
 
 
 
@@ -39,7 +33,7 @@ namespace Application.AutoMapper
                 .ConstructUsing((dto, context) => PostComment.Create(
                     dto.PostId,
                     dto.Text,
-                    dto.UserProfileId))
+                    dto.CreatedById))
                 .ForAllMembers(opts => opts.Ignore());
 
             // PostInterAction Mappings
@@ -48,8 +42,8 @@ namespace Application.AutoMapper
             CreateMap<CreatePostInterActionDto, PostInterAction>()
                 .ConstructUsing((dto, context) => PostInterAction.Create(
                     dto.PostId,
-                    dto.UserProfileId,
-                    dto.ReactionType))
+                    dto.ReactionType,
+                    dto.CreatedById))
                 .ForAllMembers(opts => opts.Ignore());
         }
     }

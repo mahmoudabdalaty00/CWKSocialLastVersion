@@ -15,10 +15,10 @@ public class PostRepository : GenericRepository<Post>, IPostRepository
         _context = context;
     }
 
-    public async Task<IReadOnlyList<Post>> GetByUserIdAsync(Guid userProfileId)
+    public async Task<IReadOnlyList<Post>> GetByUserIdAsync(string userProfileId)
     {
         return await _context.Posts
-            .Where(p => p.UserProfileId == userProfileId && !p.IsDeleted)
+            .Where(p => p.CreatedById == userProfileId && !p.IsDeleted)
             .ToListAsync();
     }
 
@@ -29,7 +29,7 @@ public class PostRepository : GenericRepository<Post>, IPostRepository
             .ToListAsync();
     }
 
-    public async Task<Post?> GetByIdWithDetailsAsync(int id)
+    public async Task<Post?> GetByIdWithDetailsAsync(string id)
     {
         return await _context.Posts
             .Include(p => p.PostComments)

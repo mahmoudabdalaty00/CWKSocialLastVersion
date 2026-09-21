@@ -6,6 +6,6 @@ namespace Application.Features.PostsFeatures.PostInteractions.Queries
 {
     public class GetPostInteractionsByPostIdQuery : IRequest<OperationResult<IEnumerable<PostInterActionResponseDto>>>
     {
-        public int PostId { get; set; }
+        public string PostId { get; set; }
     }
 }

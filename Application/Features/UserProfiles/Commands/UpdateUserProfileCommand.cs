@@ -10,7 +10,7 @@ namespace Application.Features.UserProfiles.Commands
 {
     public class UpdateUserProfileCommand : IRequest<OperationResult<UserProfileResponseDto>>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }

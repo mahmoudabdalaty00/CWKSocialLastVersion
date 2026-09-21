@@ -8,4 +8,5 @@ public class UpdatePostDto
     public string MediaUrl { get; set; } = string.Empty;
     public PostType PostType { get; set; } = PostType.Text;
     public PrivacySetting PrivacySetting { get; set; } = PrivacySetting.Public;
+    public string UpdatedById { get; set; }
 }

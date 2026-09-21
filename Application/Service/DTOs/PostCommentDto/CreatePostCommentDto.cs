@@ -2,7 +2,8 @@ namespace Application.Service.DTOs.PostCommentDto;
 
 public class CreatePostCommentDto
 {
-    public int PostId { get; set; }
+    public string PostId { get; set; }
     public string Text { get; set; } = string.Empty;
-    public Guid UserProfileId { get; set; }
+    public string CreatedById { get; set; }
+    public string UpdatedById { get; set; }
 }

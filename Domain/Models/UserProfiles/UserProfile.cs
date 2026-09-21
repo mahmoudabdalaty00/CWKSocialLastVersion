@@ -3,7 +3,7 @@ using Domain.Models.Posts;
 
 namespace Domain.Models.UserProfiles
 {
-    public sealed class UserProfile : BaseEntity<Guid>
+    public sealed class UserProfile : BaseEntity<string>
     {
         private readonly List<Post> _posts = new List<Post>();
         private readonly List<PostComment> _postComments = new List<PostComment>();

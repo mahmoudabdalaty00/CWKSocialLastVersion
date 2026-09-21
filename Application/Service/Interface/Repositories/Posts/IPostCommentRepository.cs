@@ -5,7 +5,7 @@ namespace Application.Service.Interface.Repositories.Posts
 {
     public interface IPostCommentRepository : IGenericRepository<PostComment>
     {
-        Task<IReadOnlyList<PostComment>> GetByPostIdAsync(int postId);
-        Task<IReadOnlyList<PostComment>> GetAllActiveByPostIdAsync(int postId);
+        Task<IReadOnlyList<PostComment>> GetByPostIdAsync(string postId);
+        Task<IReadOnlyList<PostComment>> GetAllActiveByPostIdAsync(string postId);
     }
 }

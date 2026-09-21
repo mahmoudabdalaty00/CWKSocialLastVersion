@@ -26,13 +26,13 @@ public class PostInterActionService : IPostInterActionService
         return _mapper.Map<PostInterActionResponseDto>(interaction);
     }
 
-    public async Task<IReadOnlyList<PostInterActionResponseDto>> GetByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostInterActionResponseDto>> GetByPostIdAsync(string postId)
     {
         var interactions = await _unitOfWork.PostInterActionRepository.GetByPostIdAsync(postId);
         return _mapper.Map<IReadOnlyList<PostInterActionResponseDto>>(interactions);
     }
 
-    public async Task<IReadOnlyList<PostInterActionResponseDto>> GetAllActiveByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostInterActionResponseDto>> GetAllActiveByPostIdAsync(string postId)
     {
         var interactions = await _unitOfWork.PostInterActionRepository.GetAllActiveByPostIdAsync(postId);
         return _mapper.Map<IReadOnlyList<PostInterActionResponseDto>>(interactions);

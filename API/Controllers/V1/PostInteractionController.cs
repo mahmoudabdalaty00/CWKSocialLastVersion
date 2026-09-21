@@ -26,7 +26,7 @@ namespace API.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.PostInteraction.GetByPost)]
-        public async Task<IActionResult> GetInteractionsByPost(int postId)
+        public async Task<IActionResult> GetInteractionsByPost(string postId)
         {
             var query = new GetPostInteractionsByPostIdQuery { PostId = postId };
             var response = await _mediator.Send(query);

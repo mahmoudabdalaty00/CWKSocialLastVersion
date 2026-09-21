@@ -15,14 +15,14 @@ public class PostCommentRepository : GenericRepository<PostComment>, IPostCommen
         _context = context;
     }
 
-    public async Task<IReadOnlyList<PostComment>> GetByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostComment>> GetByPostIdAsync(string postId)
     {
         return await _context.PostComments
             .Where(c => c.PostId == postId)
             .ToListAsync();
     }
 
-    public async Task<IReadOnlyList<PostComment>> GetAllActiveByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostComment>> GetAllActiveByPostIdAsync(string postId)
     {
         return await _context.PostComments
             .Where(c => c.PostId == postId && !c.IsDeleted)

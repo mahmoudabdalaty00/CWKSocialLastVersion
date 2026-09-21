@@ -44,7 +44,7 @@ namespace API.Controllers.V1
         [HttpGet(ApiRoutes.UserProfiles.GetUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
         public async Task<IActionResult> GetUserProfileById(string id)
         {
-            var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
+            var query = new GetUserProfileByIdQuery { UserProfileId = id };
             var response = await _mediator.Send(query);
 
             if (response.IsError)
@@ -80,7 +80,7 @@ namespace API.Controllers.V1
         {
             var command = _mapper.Map<UpdateUserProfileCommand>(userProfile);
 
-            command.Id = Guid.Parse(id);
+            command.Id = id;
             // Handle the command and return the result
             var response = await _mediator.Send(command);
 
@@ -93,7 +93,7 @@ namespace API.Controllers.V1
         [HttpDelete(ApiRoutes.UserProfiles.DeleteUserProfile + "/" + ApiRoutes.UserProfiles.IdRoute)]
         public async Task<IActionResult> DeleteUserProfile(string id)
         {
-            var command = new DeleteUserProfileCommand { Id = Guid.Parse(id) };
+            var command = new DeleteUserProfileCommand { Id = id };
 
             if (command == null)
                 return NotFound();

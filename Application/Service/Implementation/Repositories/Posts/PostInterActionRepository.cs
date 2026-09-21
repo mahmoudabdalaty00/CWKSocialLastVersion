@@ -15,14 +15,14 @@ public class PostInterActionRepository : GenericRepository<PostInterAction>, IPo
         _context = context;
     }
 
-    public async Task<IReadOnlyList<PostInterAction>> GetByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostInterAction>> GetByPostIdAsync(string postId)
     {
         return await _context.PostInterActions
             .Where(i => i.PostId == postId)
             .ToListAsync();
     }
 
-    public async Task<IReadOnlyList<PostInterAction>> GetAllActiveByPostIdAsync(int postId)
+    public async Task<IReadOnlyList<PostInterAction>> GetAllActiveByPostIdAsync(string postId)
     {
         return await _context.PostInterActions
             .Where(i => i.PostId == postId && !i.IsDeleted)

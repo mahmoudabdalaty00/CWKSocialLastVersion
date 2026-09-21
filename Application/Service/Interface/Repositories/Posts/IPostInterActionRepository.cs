@@ -5,7 +5,7 @@ namespace Application.Service.Interface.Repositories.Posts
 {
     public interface IPostInterActionRepository : IGenericRepository<PostInterAction>
     {
-        Task<IReadOnlyList<PostInterAction>> GetByPostIdAsync(int postId);
-        Task<IReadOnlyList<PostInterAction>> GetAllActiveByPostIdAsync(int postId);
+        Task<IReadOnlyList<PostInterAction>> GetByPostIdAsync(string postId);
+        Task<IReadOnlyList<PostInterAction>> GetAllActiveByPostIdAsync(string postId);
     }
 }

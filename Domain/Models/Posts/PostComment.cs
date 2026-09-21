@@ -9,68 +9,113 @@ namespace Domain.Models.Posts
     {
         private PostComment()
         {
-
         }
 
-        public int PostId { get; private set; }
-        public string Comment { get; private set; }
-        public Guid UserProfileId { get; private set; }
+        public string PostId { get; private set; }
+        public string Comment { get; private set; } = string.Empty;
         public Post? Post { get; private set; }
-        public UserProfile? UserProfile { get; private set; }
 
 
-        //Factyory method to create a new comment
-        public static PostComment Create(int postId, string text, Guid userProfileId)
+        // Audit trail properties
+        public string CreatedById { get; private set; }
+        public UserProfile CreatedBy { get; private set; }
+
+        public string UpdatedById { get; private set; }
+        public UserProfile UpdatedBy { get; private set; }
+
+        public string DeletedById { get; private set; }
+        public UserProfile DeletedBy { get; private set; }
+
+        #region Methods
+
+        /// <summary>
+        /// Factory method to create a new post comment
+        /// </summary>
+        public static PostComment Create(string postId, string text,string createdById)
         {
-            if (postId <= 0)
-                throw new ArgumentException("PostId Not Valid", nameof(postId));
+            if (string.IsNullOrEmpty(postId))
+                throw new ArgumentException("PostId not valid", nameof(postId));
+
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentException("Comment cannot be empty", nameof(text));
-            if (userProfileId == Guid.Empty)
-                throw new ArgumentException("UserProfileId cannot be empty", nameof(userProfileId));
 
+            if (string.IsNullOrEmpty(createdById))
+                throw new ArgumentException("CreatedById cannot be empty", nameof(createdById));
 
-            var post = new PostComment
+            var now = DateTime.UtcNow;
+            var comment = new PostComment
             {
                 PostId = postId,
                 Comment = text.Trim(),
-                UserProfileId = userProfileId,
+                CreatedById = createdById,
+                UpdatedById = createdById,
+                CreatedAt = now,
+                UpdatedAt = now,
             };
 
-            // Validate the post
-            var validate = new PostCommentValidator();
-            var validationResult = validate.Validate(post);
+            // Validate the comment
+            var validator = new PostCommentValidator();
+            var validationResult = validator.Validate(comment);
+
             if (!validationResult.IsValid)
             {
                 var exception = new PostCommentNotValideException("Invalid post comment.");
-
                 exception.ValidationErrors.AddRange(
                     validationResult.Errors.Select(e => e.ErrorMessage));
 
                 throw exception;
             }
-            post.InitializeAudit();
-            return post;
 
+            return comment;
         }
 
-
-
-        public  void Update(string text)
+        /// <summary>
+        /// Update the comment text
+        /// </summary>
+        public void Update(string text, string updatedById)
         {
-
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentException("Text cannot be empty", nameof(text));
+
+            if (string.IsNullOrEmpty(updatedById))
+                throw new ArgumentException("UpdatedById cannot be empty", nameof(updatedById));
 
             if (IsDeleted)
                 throw new InvalidOperationException("Cannot update a deleted comment");
 
-
             Comment = text.Trim();
-            SetUpdatedAt();
+            UpdatedById = updatedById;
+            UpdatedAt = DateTime.UtcNow;
 
+            // Validate after update
+            var validator = new PostCommentValidator();
+            var validationResult = validator.Validate(this);
+
+            if (!validationResult.IsValid)
+            {
+                var exception = new PostCommentNotValideException("Invalid post comment after update.");
+                exception.ValidationErrors.AddRange(
+                    validationResult.Errors.Select(e => e.ErrorMessage));
+
+                throw exception;
+            }
         }
 
+        /// <summary>
+        /// Delete the comment
+        /// </summary>
+        public void Delete(string deletedById)
+        {
+            if (IsDeleted)
+                return; // Already deleted
 
+            if (string.IsNullOrEmpty(deletedById))
+                throw new ArgumentException("DeletedById cannot be empty", nameof(deletedById));
+
+            DeletedById = deletedById;
+            base.Delete();
+        }
+
+        #endregion
     }
 }

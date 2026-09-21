@@ -4,8 +4,8 @@ namespace Application.Service.DTOs.PostInterActionDto;
 
 public class CreatePostInterActionDto
 {
-    public int PostId { get; set; }
+    public string PostId { get; set; }
     public ReactionType ReactionType { get; set; }
-    public Guid UserProfileId { get; private set; }
+    public string CreatedById { get; private set; }
 
 }

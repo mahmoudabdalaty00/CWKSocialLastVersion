@@ -10,7 +10,7 @@ namespace Application.Features.UserProfiles.Queries
 {
     public class GetUserProfileByIdQuery :IRequest<OperationResult<UserProfileResponseDto>>
     {
-        public Guid UserProfileId { get; set; }
+        public string UserProfileId { get; set; }
 
     }
 }
