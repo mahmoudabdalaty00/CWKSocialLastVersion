@@ -11,16 +11,17 @@ namespace Domain.Models.Posts
         {
         }
 
-        public string PostId { get; private set; }
+   
         public ReactionType ReactionType { get; private set; }
 
 
 
         // Navigation properties
-        public Post? Post { get; private set; }
+        public string PostId { get; private set; }
+        public Post Post { get; private set; }
 
         // Audit trail properties
-        public Guid CreatedById { get; private set; }
+        public string CreatedById { get; private set; }
         public UserProfile CreatedBy { get; private set; }
 
 
@@ -45,7 +46,7 @@ namespace Domain.Models.Posts
             {
                 PostId = postId,
                 ReactionType = reaction,
-                CreatedById = Guid.Parse(createdById),
+                CreatedById = createdById,
                 CreatedAt = now,
                 UpdatedAt = now,
             };

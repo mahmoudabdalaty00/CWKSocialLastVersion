@@ -11,8 +11,5 @@ namespace Data.Configuration
             builder.OwnsOne(x => x.BasicInfo);
         }
     }
-
-
-
-
+     
 }

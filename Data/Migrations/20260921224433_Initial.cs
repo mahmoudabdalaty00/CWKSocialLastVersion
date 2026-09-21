@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class IntiDataBase : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,11 +55,11 @@ namespace Data.Migrations
                 name: "UserProfiles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     IdentityUserId = table.Column<string>(type: "text", nullable: false),
                     BasicInfo_FirstName = table.Column<string>(type: "text", nullable: false),
                     BasicInfo_LastName = table.Column<string>(type: "text", nullable: false),
-                    BasicInfo_DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    BasicInfo_DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
                     BasicInfo_Bio = table.Column<string>(type: "text", nullable: false),
                     BasicInfo_Phone = table.Column<string>(type: "text", nullable: false),
                     BasicInfo_EmailAddress = table.Column<string>(type: "text", nullable: false),
@@ -184,10 +184,14 @@ namespace Data.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false),
-                    UserProfileId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PostType = table.Column<int>(type: "integer", nullable: false),
+                    MediaUrl = table.Column<string>(type: "text", nullable: true),
+                    PrivacySetting = table.Column<int>(type: "integer", nullable: false),
+                    CreatedById = table.Column<string>(type: "text", nullable: false),
+                    UpdatedById = table.Column<string>(type: "text", nullable: true),
+                    DeletedById = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -197,11 +201,23 @@ namespace Data.Migrations
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_UserProfiles_UserProfileId",
-                        column: x => x.UserProfileId,
+                        name: "FK_Posts_UserProfiles_CreatedById",
+                        column: x => x.CreatedById,
                         principalTable: "UserProfiles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_UserProfiles_DeletedById",
+                        column: x => x.DeletedById,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_UserProfiles_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,9 +226,11 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PostId = table.Column<int>(type: "integer", nullable: false),
-                    Text = table.Column<string>(type: "text", nullable: false),
-                    UserProfileId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PostId = table.Column<string>(type: "text", nullable: false),
+                    Comment = table.Column<string>(type: "text", nullable: false),
+                    CreatedById = table.Column<string>(type: "text", nullable: false),
+                    UpdatedById = table.Column<string>(type: "text", nullable: true),
+                    DeletedById = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -227,6 +245,24 @@ namespace Data.Migrations
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostComments_UserProfiles_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PostComments_UserProfiles_DeletedById",
+                        column: x => x.DeletedById,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PostComments_UserProfiles_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,8 +271,9 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PostId = table.Column<int>(type: "integer", nullable: false),
                     ReactionType = table.Column<int>(type: "integer", nullable: false),
+                    PostId = table.Column<string>(type: "text", nullable: false),
+                    CreatedById = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -249,6 +286,12 @@ namespace Data.Migrations
                         name: "FK_PostInterActions_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostInterActions_UserProfiles_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "UserProfiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -286,9 +329,29 @@ namespace Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_PostComments_CreatedById",
+                table: "PostComments",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostComments_DeletedById",
+                table: "PostComments",
+                column: "DeletedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostComments_PostId",
                 table: "PostComments",
                 column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostComments_UpdatedById",
+                table: "PostComments",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostInterActions_CreatedById",
+                table: "PostInterActions",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PostInterActions_PostId",
@@ -296,9 +359,19 @@ namespace Data.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_UserProfileId",
+                name: "IX_Posts_CreatedById",
                 table: "Posts",
-                column: "UserProfileId");
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_DeletedById",
+                table: "Posts",
+                column: "DeletedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_UpdatedById",
+                table: "Posts",
+                column: "UpdatedById");
         }
 
         /// <inheritdoc />

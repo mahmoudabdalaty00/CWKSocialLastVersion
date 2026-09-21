@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260911190125_UpdateDataBase")]
-    partial class UpdateDataBase
+    [Migration("20260921224433_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,8 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Posts.Post", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -40,8 +37,15 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("CreatedById")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DeletedById")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -58,12 +62,16 @@ namespace Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("UserProfileId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserProfileId");
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedById");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Posts");
                 });
@@ -83,26 +91,38 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("CreatedById")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DeletedById")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("integer");
+                    b.Property<string>("PostId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("UserProfileId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("UpdatedById")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("DeletedById");
+
                     b.HasIndex("PostId");
 
-                    b.HasIndex("UserProfileId");
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("PostComments");
                 });
@@ -118,14 +138,19 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("CreatedById")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("integer");
+                    b.Property<string>("PostId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("ReactionType")
                         .HasColumnType("integer");
@@ -133,23 +158,19 @@ namespace Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("UserProfileId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("CreatedById");
 
-                    b.HasIndex("UserProfileId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("PostInterActions");
                 });
 
             modelBuilder.Entity("Domain.Models.UserProfiles.UserProfile", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -368,59 +389,87 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Posts.Post", b =>
                 {
-                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "UserProfile")
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "CreatedBy")
                         .WithMany("Posts")
-                        .HasForeignKey("UserProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("UserProfile");
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "DeletedBy")
+                        .WithMany()
+                        .HasForeignKey("DeletedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("DeletedBy");
+
+                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("Domain.Models.Posts.PostComment", b =>
                 {
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "CreatedBy")
+                        .WithMany("PostComments")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "DeletedBy")
+                        .WithMany()
+                        .HasForeignKey("DeletedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Domain.Models.Posts.Post", "Post")
                         .WithMany("PostComments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "UserProfile")
-                        .WithMany("PostComments")
-                        .HasForeignKey("UserProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("DeletedBy");
 
                     b.Navigation("Post");
 
-                    b.Navigation("UserProfile");
+                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("Domain.Models.Posts.PostInterAction", b =>
                 {
+                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "CreatedBy")
+                        .WithMany("PostInterActions")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Models.Posts.Post", "Post")
                         .WithMany("PostInterActions")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.UserProfiles.UserProfile", "UserProfile")
-                        .WithMany("PostInterActions")
-                        .HasForeignKey("UserProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("CreatedBy");
 
                     b.Navigation("Post");
-
-                    b.Navigation("UserProfile");
                 });
 
             modelBuilder.Entity("Domain.Models.UserProfiles.UserProfile", b =>
                 {
                     b.OwnsOne("Domain.Models.UserProfiles.BasicInfo", "BasicInfo", b1 =>
                         {
-                            b1.Property<Guid>("UserProfileId")
-                                .HasColumnType("uuid");
+                            b1.Property<string>("UserProfileId")
+                                .HasColumnType("text");
 
                             b1.Property<string>("Bio")
                                 .IsRequired()

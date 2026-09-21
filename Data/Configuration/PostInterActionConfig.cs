@@ -8,7 +8,12 @@ namespace Data.Configuration
     {
         public void Configure(EntityTypeBuilder<PostInterAction> builder)
         {
-            builder.HasKey(pc => pc.Id);
+            builder.HasKey(x => x.Id);
+
+            builder.HasOne(x => x.Post)
+                .WithMany(p => p.PostInterActions)
+                .HasForeignKey(x => x.PostId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

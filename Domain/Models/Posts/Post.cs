@@ -26,11 +26,11 @@ namespace Domain.Models.Posts
         public string CreatedById { get; private set; }
         public UserProfile CreatedBy { get; private set; }
 
-        public string UpdatedById { get; private set; }
-        public UserProfile UpdatedBy { get; private set; }
+        public string? UpdatedById { get; private set; }
+        public UserProfile? UpdatedBy { get; private set; }
 
-        public string DeletedById { get; private set; }
-        public UserProfile DeletedBy { get; private set; }
+        public string? DeletedById { get; private set; }
+        public UserProfile? DeletedBy { get; private set; }
 
         public IEnumerable<PostComment> PostComments => _postComments.AsReadOnly();
         public IEnumerable<PostInterAction> PostInterActions => _postInterActions.AsReadOnly();
