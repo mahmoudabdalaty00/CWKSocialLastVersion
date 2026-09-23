@@ -1,7 +1,7 @@
+using Application.DTOs.PostCommentDto;
+using Application.DTOs.PostDto;
+using Application.DTOs.PostInterActionDto;
 using Application.Features.PostsFeatures.Posts.Commands;
-using Application.Service.DTOs.PostCommentDto;
-using Application.Service.DTOs.PostDto;
-using Application.Service.DTOs.PostInterActionDto;
 using AutoMapper;
 using Domain.Models.Posts;
 

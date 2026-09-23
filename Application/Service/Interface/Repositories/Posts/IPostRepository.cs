@@ -1,9 +1,8 @@
-using Application.Service.Interface.Common;
 using Domain.Models.Posts;
 
 namespace Application.Service.Interface.Repositories.Posts
 {
-    public interface IPostRepository : IGenericRepository<Post>
+    public interface IPostRepository  
     {
         Task<IReadOnlyList<Post>> GetByUserIdAsync(string userProfileId);
         Task<IReadOnlyList<Post>> GetAllActiveAsync();

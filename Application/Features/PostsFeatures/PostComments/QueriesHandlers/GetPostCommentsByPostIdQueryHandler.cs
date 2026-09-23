@@ -1,6 +1,6 @@
+using Application.DTOs.PostCommentDto;
 using Application.Features.PostsFeatures.PostComments.Queries;
 using Application.Models;
-using Application.Service.DTOs.PostCommentDto;
 using Application.Service.Interface.Services.PostServices;
 using Domain.Models.Conasts;
 using MediatR;
@@ -26,7 +26,7 @@ namespace Application.Features.PostsFeatures.PostComments.QueriesHandlers
 
             try
             {
-                result.Result = await _postCommentService.GetAllActiveByPostIdAsync(request.PostId);
+                result.Result = await _postCommentService.GetByPostIdAsync(request.PostId);
             }
             catch (Exception ex)
             {

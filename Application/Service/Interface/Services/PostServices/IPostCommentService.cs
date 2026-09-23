@@ -1,4 +1,4 @@
-using Application.Service.DTOs.PostCommentDto;
+using Application.DTOs.PostCommentDto;
 
 namespace Application.Service.Interface.Services.PostServices;
 
@@ -6,7 +6,7 @@ public interface IPostCommentService
 {
     Task<PostCommentResponseDto> GetByIdAsync(int id);
     Task<IReadOnlyList<PostCommentResponseDto>> GetByPostIdAsync(string postId);
-    Task<IReadOnlyList<PostCommentResponseDto>> GetAllActiveByPostIdAsync(string postId);
+    //Task<IReadOnlyList<PostCommentResponseDto>> GetAllActiveByPostIdAsync(string postId);
     Task<PostCommentResponseDto> CreateAsync(CreatePostCommentDto dto);
     Task<PostCommentResponseDto> UpdateAsync(int id, UpdatePostCommentDto dto);
     Task DeleteAsync(int id);

@@ -1,6 +1,6 @@
+using Application.DTOs.UserProfileDto;
 using Application.Features.UserProfiles.Queries;
 using Application.Models;
-using Application.Service.DTOs.UserProfileDto;
 using Application.Service.Interface.Services.UserProfileServices;
 using MediatR;
 using System.Collections.Generic;

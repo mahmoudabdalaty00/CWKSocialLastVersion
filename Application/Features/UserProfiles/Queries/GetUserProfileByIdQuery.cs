@@ -3,8 +3,8 @@ using Domain.Models.UserProfiles;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using Application.Service.DTOs.UserProfileDto;
 using System.Text;
+using Application.DTOs.UserProfileDto;
 
 namespace Application.Features.UserProfiles.Queries
 {

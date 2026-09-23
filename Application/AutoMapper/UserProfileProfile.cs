@@ -1,7 +1,7 @@
 ﻿using Application.Features.UserProfiles.Commands;
 using AutoMapper;
 using Domain.Models.UserProfiles;
-using Application.Service.DTOs.UserProfileDto;
+using Application.DTOs.UserProfileDto;
 
 namespace Application.AutoMapper
 {

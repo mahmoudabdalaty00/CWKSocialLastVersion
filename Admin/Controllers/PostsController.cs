@@ -1,5 +1,5 @@
 using Admin.ViewModels;
-using Application.Service.DTOs.PostDto;
+using Application.DTOs.PostDto;
 using Application.Service.Interface.Services.PostServices;
 using Microsoft.AspNetCore.Mvc;
 

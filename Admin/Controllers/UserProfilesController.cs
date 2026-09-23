@@ -1,5 +1,5 @@
 using Admin.ViewModels;
-using Application.Service.DTOs.UserProfileDto;
+using Application.DTOs.UserProfileDto;
 using Application.Service.Interface.Services.UserProfileServices;
 using Microsoft.AspNetCore.Mvc;
 

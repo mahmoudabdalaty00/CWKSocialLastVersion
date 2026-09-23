@@ -1,5 +1,5 @@
 using Admin.ViewModels;
-using Application.Service.DTOs.PostInterActionDto;
+using Application.DTOs.PostInterActionDto;
 using Application.Service.Interface.Services.PostServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +10,7 @@ public class PostInteractionsController(IPostInterActionService postInteractionS
     public async Task<IActionResult> Index(string postId)
     {
         ViewBag.PostId = postId;
-        return View((await postInteractionService.GetAllActiveByPostIdAsync(postId)).Select(ToListItem));
+        return View((await postInteractionService.GetByPostIdAsync(postId)).Select(ToListItem));
     }
     public async Task<IActionResult> Details(int id) => await WithInteraction(id, interaction => View(ToListItem(interaction)));
     public IActionResult Create(string postId) => View(new PostInteractionFormViewModel { PostId = postId });

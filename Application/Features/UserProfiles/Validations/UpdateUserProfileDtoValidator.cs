@@ -1,5 +1,5 @@
+using Application.DTOs.UserProfileDto;
 using Application.Features.UserProfiles.Commands;
-using Application.Service.DTOs.UserProfileDto;
 using Data.MainDb;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;

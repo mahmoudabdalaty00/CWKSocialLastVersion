@@ -11,4 +11,5 @@
         ValidationError = 422,
         DbError = 1001,
     }
+
 }

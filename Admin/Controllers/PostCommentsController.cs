@@ -1,5 +1,5 @@
 using Admin.ViewModels;
-using Application.Service.DTOs.PostCommentDto;
+using Application.DTOs.PostCommentDto;
 using Application.Service.Interface.Services.PostServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +11,7 @@ public class PostCommentsController(IPostCommentService postCommentService) : Co
     {
         var postID =postId;
         ViewBag.PostId = postID;
-        return View((await postCommentService.GetAllActiveByPostIdAsync(postID)).Select(ToListItem));
+        return View((await postCommentService.GetByPostIdAsync(postID)).Select(ToListItem));
     }
     public async Task<IActionResult> Details(int id) 
         => await WithComment(id, comment => View(ToListItem(comment)));

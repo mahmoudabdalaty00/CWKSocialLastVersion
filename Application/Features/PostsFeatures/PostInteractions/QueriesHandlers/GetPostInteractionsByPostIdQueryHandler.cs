@@ -1,6 +1,6 @@
+using Application.DTOs.PostInterActionDto;
 using Application.Features.PostsFeatures.PostInteractions.Queries;
 using Application.Models;
-using Application.Service.DTOs.PostInterActionDto;
 using Application.Service.Interface.Services.PostServices;
 using Domain.Models.Conasts;
 using MediatR;
@@ -26,7 +26,7 @@ namespace Application.Features.PostsFeatures.PostInteractions.QueriesHandlers
 
             try
             {
-                result.Result = await _postInterActionService.GetAllActiveByPostIdAsync(request.PostId);
+                result.Result = await _postInterActionService.GetByPostIdAsync(request.PostId);
             }
             catch (Exception ex)
             {

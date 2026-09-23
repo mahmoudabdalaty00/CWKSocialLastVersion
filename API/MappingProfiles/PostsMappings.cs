@@ -3,10 +3,10 @@ using API.Contracts.Posts.Responses;
 using Application.Features.PostsFeatures.PostComments.Command;
 using Application.Features.PostsFeatures.PostInteractions.Command;
 using Application.Features.PostsFeatures.Posts.Commands;
-using Application.Service.DTOs.PostDto;
-using Application.Service.DTOs.PostCommentDto;
-using Application.Service.DTOs.PostInterActionDto;
 using AutoMapper;
+using Application.DTOs.PostCommentDto;
+using Application.DTOs.PostDto;
+using Application.DTOs.PostInterActionDto;
 
 namespace API.MappingProfiles
 {

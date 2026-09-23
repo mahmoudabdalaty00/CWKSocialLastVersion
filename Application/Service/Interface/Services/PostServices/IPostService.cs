@@ -1,5 +1,6 @@
+
+using Application.DTOs.PostDto;
 using Application.Models;
-using Application.Service.DTOs.PostDto;
 
 namespace Application.Service.Interface.Services.PostServices;
 

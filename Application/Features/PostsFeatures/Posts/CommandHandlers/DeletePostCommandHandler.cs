@@ -1,6 +1,6 @@
+using Application.DTOs.PostDto;
 using Application.Features.PostsFeatures.Posts.Commands;
 using Application.Models;
-using Application.Service.DTOs.PostDto;
 using Application.Service.Interface.Services.PostServices;
 using Domain.Models.Conasts;
 using MediatR;

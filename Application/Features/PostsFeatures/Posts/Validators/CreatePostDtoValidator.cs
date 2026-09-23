@@ -1,5 +1,4 @@
-﻿using Application.Service.DTOs.PostDto;
-using Application.Service.DTOs.UserProfileDto;
+﻿using Application.DTOs.PostDto;
 using Data.MainDb;
 using Domain.Models.Conasts;
 using FluentValidation;

@@ -1,5 +1,5 @@
+using Application.DTOs.PostDto;
 using Application.Models;
-using Application.Service.DTOs.PostDto;
 using Domain.Models.Conasts;
 using MediatR;
 

@@ -1,5 +1,5 @@
+using Application.DTOs.UserProfileDto;
 using Application.Models;
-using Application.Service.DTOs.UserProfileDto;
 
 namespace Application.Service.Interface.Services.UserProfileServices;
 

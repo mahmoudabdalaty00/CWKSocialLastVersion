@@ -1,7 +1,7 @@
 using API.Contracts.UserProfile.Requests;
 using API.Contracts.UserProfile.Responses;
+using Application.DTOs.UserProfileDto;
 using Application.Features.UserProfiles.Commands;
-using Application.Service.DTOs.UserProfileDto;
 using AutoMapper;
 using Domain.Models.UserProfiles;
 
