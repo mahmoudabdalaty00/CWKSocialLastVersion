@@ -4,15 +4,14 @@ namespace Data.Service
 {
     public static class Config
     {
-        private static IConfiguration _configuration;
+
 
         static Config()
         {
             IConfigurationBuilder builder =
                 new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            _configuration = builder.Build();
+            IConfiguration configuration = builder.Build();
             UpdateProperties(Env);
-            LoadGoogleOAuthSettings();
         }
 
         public static SysEnvironment Env = SysEnvironment.Local;
@@ -145,16 +144,7 @@ namespace Data.Service
         #endregion
 
 
-        #region Google settings
 
-        public static string Google_RevokeURL { get; set; } = "https://oauth2.googleapis.com/revoke";
-
-        public static string Google_ClientId { get; set; }
-
-        public static string Google_ClientSecret { get; set; }
-        public static string Google_Map_API_KEY { get; set; }
-
-        #endregion
 
         #region Apple settings
 
@@ -311,25 +301,6 @@ namespace Data.Service
                     break;
             }
         }
-
-        private static void LoadGoogleOAuthSettings()
-        {
-            try
-            {
-                var googleSettings = _configuration.GetSection("GoogleOAuth");
-                Google_ClientId = googleSettings["ClientId"] ?? Google_ClientId;
-                Google_ClientSecret = googleSettings["ClientSecret"] ?? Google_ClientSecret;
-                Google_Map_API_KEY = googleSettings["MapApiKey"] ?? Google_Map_API_KEY;
-            }
-            catch
-            {
-                // If configuration loading fails, use defaults (empty strings)
-                Google_ClientId = Google_ClientId ?? string.Empty;
-                Google_ClientSecret = Google_ClientSecret ?? string.Empty;
-                Google_Map_API_KEY = Google_Map_API_KEY ?? string.Empty;
-            }
-        }
-
 
         public static string? GetWebViewRoute(bool? webView = false)
         {
