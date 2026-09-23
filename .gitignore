@@ -360,4 +360,11 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
-FodyWeavers.xsd
+
+# appsettings and user secrets - never commit sensitive configuration
+appsettings.Development.json
+appsettings.Staging.json
+appsettings.Production.json
+appsettings.Local.json
+appsettings.json.user
+secrets.json
